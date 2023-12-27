@@ -4,19 +4,20 @@ use gtk::{glib, Application, ApplicationWindow, Button};
 
 fn main() -> glib::ExitCode {
     let application = Application::builder()
-        .application_id("com.example.FirstGtkApp")
+        .application_id("net.koonts.WordCount")
         .build();
 
     application.connect_activate(|app| {
         let window = ApplicationWindow::builder()
             .application(app)
-            .title("First GTK Program")
+            .title("Word Count")
             .default_width(350)
             .default_height(70)
             .build();
 
-        let button = Button::with_label("Click me!");
+        let button = Button::with_label("Open File");
         button.connect_clicked(|_| {
+            // load file
             eprintln!("Clicked!");
         });
         window.set_child(Some(&button));
