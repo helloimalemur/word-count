@@ -1,4 +1,4 @@
-use gtk4 as gtk;
+use gtk;
 use gtk::prelude::*;
 use gtk::{glib, Application, ApplicationWindow, Button};
 
