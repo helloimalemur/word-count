@@ -1,7 +1,8 @@
-use slint::ComponentHandle;
+use slint::{ComponentHandle, LogicalSize, Window, WindowSize};
 use crate::ui::ui::WordCount;
 
 mod ui;
+mod entities;
 
 fn main() {
     let word_count = WordCount::new().unwrap();
@@ -12,6 +13,8 @@ fn main() {
         val += 1;
         wc.set_counter(val);
     });
+    let ws = WindowSize::Logical(LogicalSize::new(200f32, 300f32));
+
 
     word_count.run().unwrap();
 
