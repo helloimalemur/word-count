@@ -1,9 +1,13 @@
 slint::slint!{
     import { SpinBox, Button, CheckBox, StandardTableView, Slider, LineEdit, ScrollView, ListView, HorizontalBox, VerticalBox, GridBox } from "std-widgets.slint";
     export component WordCount inherits Window {
+        callback getdata;
+
         height: 400px;
         width: 600px;
         in-out property <int> counter: 0;
+        in-out property <string> astring: "";
+        in-out property <string> bstring: "atest";
         callback button-pressed <=> button.clicked;
         VerticalBox {
             height: 200px;
@@ -20,10 +24,10 @@ slint::slint!{
             ];
             rows: [
                 [
-                    { text: "Item 1" }, { text: "Item 2" },
+                    { text: root.astring }, { text: "Item 2" },
                 ],
                 [
-                    { text: "Item 1" }, { text: "Item 2" },
+                    { text: root.bstring }, { text: "Item 2" },
                 ],
                 [
                     { text: "Item 1" }, { text: "Item 2" },

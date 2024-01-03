@@ -1,4 +1,4 @@
-use slint::{ComponentHandle, LogicalSize, Window, WindowSize};
+use slint::{ComponentHandle, LogicalSize, SharedString, Window, WindowSize};
 use crate::ui::ui::WordCount;
 
 mod ui;
@@ -13,6 +13,11 @@ fn main() {
         let mut val = wc.get_counter();
         val += 1;
         wc.set_counter(val);
+
+        let mut strval = wc.get_astring();
+        strval = SharedString::from("wonderful".to_string());
+        wc.set_astring(strval);
+
     });
     let ws = WindowSize::Logical(LogicalSize::new(200f32, 300f32));
 
