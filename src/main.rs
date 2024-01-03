@@ -1,3 +1,5 @@
+use std::fmt::format;
+use chrono::Local;
 use slint::{ComponentHandle, LogicalSize, Model, SharedString, Window, WindowSize};
 use crate::ui::ui::WordCount;
 
@@ -20,7 +22,8 @@ fn main() {
 
         let mut current_row = wc.get_list_of_structs().row_count();
         current_row = val as usize;
-        array.set_row_data(current_row, (SharedString::from("text: asdfsd"),));
+        let text = format!("text: {}", Local::now().timestamp());
+        array.set_row_data(current_row, (SharedString::from(text),));
         wc.set_list_of_structs(array);
 
         println!("{}", current_row);
@@ -33,6 +36,9 @@ fn main() {
 
         // increment counter
         val += 1;
+        if val == 10 {
+            val = 0;
+        }
         wc.set_counter(val);
     });
     let ws = WindowSize::Logical(LogicalSize::new(200f32, 300f32));
