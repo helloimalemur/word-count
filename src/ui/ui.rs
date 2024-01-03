@@ -9,7 +9,7 @@ slint::slint!{
         in-out property <string> astring: "";
         in-out property <string> bstring: "atest";
         callback button-pressed <=> button.clicked;
-        VerticalBox {
+        table := VerticalBox {
             height: 200px;
             width: 400px;
             button := Button {
