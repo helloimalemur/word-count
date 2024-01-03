@@ -11,7 +11,7 @@ slint::slint!{
         in-out property <[{text: string, text: string}]> listof: [];
         callback button-pressed <=> button.clicked;
 
-        in-out property<[{a: string, b: string}]> list-of-structs: [{ a: "asf", b: "hello" }, {text: "dd", text: "world"}];
+        in-out property<[{text: string, text: string}]> list-of-structs: [{text: "dd", text: "world"}];
 
         VerticalBox {
             height: 200px;
@@ -33,9 +33,9 @@ slint::slint!{
                     [
                         { text: root.bstring }, { text: "Item 2" },
                     ],
-                    // [
-                    //     root.rowa
-                    // ],
+                    [
+                        root.list-of-structs[0],
+                    ],
                 ];
             }
         }
