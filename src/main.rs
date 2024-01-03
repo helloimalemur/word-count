@@ -21,9 +21,10 @@ fn main() {
         let mut list = wc.get_listof();
         list.set_row_data(0, Default::default());
 
-        // let mut array = wc.get_list_of_structs();
-        // array.set_row_data(0, (SharedString::from("asf"), SharedString::from("asf")));
-        // wc.set_list_of_structs(array);
+        let mut array = wc.get_list_of_structs();
+        let pos = array.row_count() + 1;
+        array.set_row_data(pos, (SharedString::from("asdf"),));
+        wc.set_list_of_structs(array);
 
         // for i in 0..10 {
         //     let mut array = wc.get_list_of_structs();

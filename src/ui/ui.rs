@@ -11,7 +11,7 @@ slint::slint!{
         in-out property <[{text: string, text: string}]> listof: [];
         callback button-pressed <=> button.clicked;
 
-        in-out property<[{text: string, text: string}]> list-of-structs: [{text: "dd", text: "world"}];
+        in-out property<[{text: string}]> list-of-structs: [{text: "world"}];
 
         VerticalBox {
             height: 200px;
@@ -19,24 +19,11 @@ slint::slint!{
             button := Button {
                 text: "Button, pressed " + root.counter + " times";
             }
-            table := StandardTableView {
-                width: 200px;
-                height: 200px;
-                columns: [
-                    { title: "Header 1" },
-                    { title: "Header 2" },
-                ];
-                rows: [
-                    [
-                        { text: root.astring }, { text: "Item 2" },
-                    ],
-                    [
-                        { text: root.bstring }, { text: "Item 2" },
-                    ],
-                    [
-                        root.list-of-structs[0],
-                    ],
-                ];
+
+            VerticalLayout {
+                for data[ind] in root.list-of-structs: my-repeated-text := Text {
+                    text: data.text;
+                }
             }
         }
     }
