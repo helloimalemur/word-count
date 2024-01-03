@@ -1,5 +1,6 @@
 slint::slint!{
     import { SpinBox, Button, CheckBox, StandardTableView, Slider, LineEdit, ScrollView, ListView, HorizontalBox, VerticalBox, GridBox } from "std-widgets.slint";
+
     export component WordCount inherits Window {
         title: "Word Count";
 
