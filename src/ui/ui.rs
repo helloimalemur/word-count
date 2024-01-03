@@ -10,7 +10,8 @@ slint::slint!{
         in-out property <string> bstring: "atest";
         in-out property <[{text: string, text: string}]> listof: [];
         callback button-pressed <=> button.clicked;
-            in-out property<[{a: string, b: string}]> list-of-structs: [{ a: "asf", b: "hello" }, {text: "dd", text: "world"}];
+
+        in-out property<[{a: string, b: string}]> list-of-structs: [{ a: "asf", b: "hello" }, {text: "dd", text: "world"}];
 
         VerticalBox {
             height: 200px;
