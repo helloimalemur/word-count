@@ -25,9 +25,4 @@ slint::slint!{
             }
         }
     }
-
-    export global DataAdapter {
-        in property <string> title: "test";
-    }
-
 }
