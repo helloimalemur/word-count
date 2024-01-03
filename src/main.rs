@@ -9,28 +9,30 @@ fn main() {
     let word_count = WordCount::new().unwrap();
     let wc_weak = word_count.as_weak();
     word_count.on_button_pressed(move || {
+        // word count handle
         let wc = wc_weak.upgrade().unwrap();
+        // counter
         let mut val = wc.get_counter();
-        val += 1;
-        wc.set_counter(val);
 
-        let mut strval = wc.get_astring();
-        strval = SharedString::from("wonderful".to_string());
-        wc.set_astring(strval.clone());
 
-        let mut list = wc.get_listof();
-        list.set_row_data(0, Default::default());
 
         let mut array = wc.get_list_of_structs();
 
-        array.set_row_data(1, (SharedString::from("text: asdfsd"),));
+        let mut current_row = wc.get_list_of_structs().row_count();
+        current_row = val as usize;;
+        array.set_row_data(current_row, (SharedString::from("text: asdfsd"),));
         wc.set_list_of_structs(array);
 
+        println!("{}", current_row);
         // for i in 0..10 {
         //     let mut array = wc.get_list_of_structs();
         //     array.set_row_data(i as usize, (SharedString::from("asf"), SharedString::from("asf")))
         // }
 
+
+        // increment counter
+        val += 1;
+        wc.set_counter(val);
     });
     let ws = WindowSize::Logical(LogicalSize::new(200f32, 300f32));
 
