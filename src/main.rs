@@ -3,6 +3,7 @@ use crate::ui::ui::WordCount;
 
 mod ui;
 mod entities;
+mod docx;
 
 fn main() {
     let word_count = WordCount::new().unwrap();
