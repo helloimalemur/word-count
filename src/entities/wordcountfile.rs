@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use chrono::{DateTime, Utc};
 
+#[derive(Debug, Clone)]
 pub struct WordCountFile {
     path: String,
     notes: String,

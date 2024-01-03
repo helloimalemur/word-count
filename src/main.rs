@@ -1,6 +1,8 @@
 use std::fmt::format;
 use chrono::Local;
 use slint::{ComponentHandle, LogicalSize, Model, SharedString, Window, WindowSize};
+use crate::entities::wordcountapp::WordCountApp;
+
 use crate::ui::ui::WordCount;
 
 mod ui;
@@ -8,6 +10,11 @@ mod entities;
 mod docx;
 
 fn main() {
+    let app = WordCountApp::new();
+
+    println!("{:#?}", app.files);
+
+
     let word_count = WordCount::new().unwrap();
     let wc_weak = word_count.as_weak();
     word_count.on_button_pressed(move || {
