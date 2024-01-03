@@ -8,7 +8,7 @@ slint::slint!{
         in-out property <int> counter: 0;
         callback button-pressed <=> button.clicked;
 
-        in-out property<[{text: string}]> list-of-structs: [{text: "hello"}, {text: "world"}, {text: "asdf"},];
+        in-out property<[{text: string}]> list-of-structs: [{text: "hello"}, {text: "world"}, {text: "asdf"}, {text: "asdf"},];
 
         VerticalBox {
             height: 200px;

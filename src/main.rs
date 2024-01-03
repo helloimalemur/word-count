@@ -19,11 +19,12 @@ fn main() {
         let mut array = wc.get_list_of_structs();
 
         let mut current_row = wc.get_list_of_structs().row_count();
-        current_row = val as usize;;
+        current_row = val as usize;
         array.set_row_data(current_row, (SharedString::from("text: asdfsd"),));
         wc.set_list_of_structs(array);
 
         println!("{}", current_row);
+
         // for i in 0..10 {
         //     let mut array = wc.get_list_of_structs();
         //     array.set_row_data(i as usize, (SharedString::from("asf"), SharedString::from("asf")))
