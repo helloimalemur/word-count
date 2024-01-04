@@ -3,14 +3,14 @@ use std::collections::HashMap;
 
 #[derive(Debug, Clone)]
 pub struct WordCountFile {
-    path: String,
-    notes: String,
-    deadline: DateTime<Utc>,
-    time_spent: i128,
-    being_modified: bool,
-    word_count: i128,
-    para_count: i32,
-    unique_words: HashMap<String, i32>,
+    pub(crate) path: String,
+    pub(crate) notes: String,
+    pub(crate) deadline: DateTime<Utc>,
+    pub(crate) time_spent: i128,
+    pub(crate) being_modified: bool,
+    pub(crate) word_count: i128,
+    pub(crate) para_count: i32,
+    pub(crate) unique_words: HashMap<String, i32>,
 }
 
 impl WordCountFile {

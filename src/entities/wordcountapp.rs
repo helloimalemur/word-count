@@ -60,6 +60,20 @@ impl WordCountApp {
 
 
 
+                let new_file = WordCountFile {
+                    path: "".to_string(),
+                    notes: "".to_string(),
+                    deadline: Default::default(),
+                    time_spent: 0,
+                    being_modified: false,
+                    word_count: 0,
+                    para_count: 0,
+                    unique_words: Default::default(),
+                };
+
+
+
+
             });
 
 
@@ -68,17 +82,12 @@ impl WordCountApp {
         self.word_count_window.lock().unwrap().run().unwrap();
     }
 
-    fn add_file(&self) {
-        let word_count_mutex_guard = self.word_count_window.lock().unwrap();
-        let mut number_of_files = word_count_mutex_guard.get_counter();
-    }
-
 }
 
 fn show_open_dialog() -> Option<PathBuf> {
     FileDialog::new()
         .set_location("~/Desktop")
-        .add_filter("PNG Image", &["docx"])
+        .add_filter("PNG Image", &["png"])
         .show_open_single_file()
         .expect("could not open file dialog")
 }
