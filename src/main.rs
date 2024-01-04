@@ -3,8 +3,6 @@ use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use slint::{ComponentHandle, Timer, TimerMode};
 use std::sync::{Arc, Mutex};
-use std::thread;
-use std::time::Duration;
 
 mod calculations;
 mod docx;

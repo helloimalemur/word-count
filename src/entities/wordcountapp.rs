@@ -100,8 +100,6 @@ impl WordCountApp {
     }
 
     pub fn load_file() {}
-
-
 }
 
 pub fn run_calculations(files: Arc<Mutex<Vec<WordCountFile>>>) {
