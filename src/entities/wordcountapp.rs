@@ -1,13 +1,15 @@
+use crate::docx::loader::read;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use chrono::Local;
-use slint::{ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Timer, TimerMode, Window, WindowSize};
+use native_dialog::FileDialog;
+use slint::{
+    ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Timer, TimerMode, Window,
+    WindowSize,
+};
 use std::fmt::format;
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex, MutexGuard};
-use native_dialog::FileDialog;
-use crate::docx::loader::read;
-
 
 pub struct WordCountApp {
     pub files: Arc<Mutex<Vec<WordCountFile>>>,
@@ -15,10 +17,10 @@ pub struct WordCountApp {
 }
 
 impl WordCountApp {
-    pub fn new(word_count_window: WordCount, files: Arc<Mutex<Vec<WordCountFile>>>) -> WordCountApp {
-
-
-
+    pub fn new(
+        word_count_window: WordCount,
+        files: Arc<Mutex<Vec<WordCountFile>>>,
+    ) -> WordCountApp {
         WordCountApp {
             files,
             word_count_window: Arc::new(Mutex::new(word_count_window.clone_strong())),
@@ -71,7 +73,6 @@ impl WordCountApp {
 
                     list_files(guard.clone());
 
-
                     // increment counter
                     counter_value += 1;
                     if counter_value == 10 {
@@ -79,26 +80,22 @@ impl WordCountApp {
                     }
                     word_count_upgraded_weak_handle.set_counter(counter_value);
                 }
-
-
             });
 
         let word_count_window_weak_handle = word_count_window.as_weak();
         let files_bind = files.clone();
-        word_count_window
-            .on_re_calc_pressed(move || {
-                let guard = files_bind.clone();
+        word_count_window.on_re_calc_pressed(move || {
+            let guard = files_bind.clone();
 
-                let word_count_upgraded_weak_handle =
-                    word_count_window_weak_handle.upgrade().unwrap();
-                let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-                let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+            let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
+            let mut counter_value = word_count_upgraded_weak_handle.get_counter();
+            let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
-                println!("Vec size; {}", guard.lock().unwrap().len());
-                // for (ind,file) in guard.lock().unwrap().iter().enumerate() {
-                //     println!("{}", file.full_file_contents);
-                // }
-            });
+            println!("Vec size; {}", guard.lock().unwrap().len());
+            // for (ind,file) in guard.lock().unwrap().iter().enumerate() {
+            //     println!("{}", file.full_file_contents);
+            // }
+        });
     }
 
     pub fn load_file() {}
@@ -106,7 +103,6 @@ impl WordCountApp {
     pub fn run_calculations(&self) {
         println!("{}", 0);
     }
-
 }
 
 fn show_open_dialog() -> Option<PathBuf> {

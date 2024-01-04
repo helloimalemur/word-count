@@ -1,5 +1,5 @@
-use std::io::Read;
 use dotext::{Docx, MsDoc};
+use std::io::Read;
 
 pub fn read(path: String) -> String {
     let mut file = Docx::open(path).expect("could not load file");
