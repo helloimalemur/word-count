@@ -80,5 +80,5 @@ fn show_open_dialog() -> Option<PathBuf> {
         .set_location("~/Desktop")
         .add_filter("PNG Image", &["docx"])
         .show_open_single_file()
-        .unwrap()
+        .expect("could not open file dialog")
 }
