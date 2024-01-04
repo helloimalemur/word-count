@@ -6,29 +6,24 @@ use std::fmt::format;
 use std::sync::{Arc, Mutex, MutexGuard};
 pub struct WordCountApp {
     pub files: Arc<Mutex<Vec<WordCountFile>>>,
-    pub word_count_window: Arc<Mutex<WordCount>>
+    pub word_count_window: Arc<Mutex<WordCount>>,
 }
 
 impl WordCountApp {
     pub fn new() -> WordCountApp {
         let word_count_window = WordCount::new().unwrap();
 
-
         let word_count_window_weak_handle = word_count_window.as_weak();
         word_count_window.on_open_file_pressed(move || {
-            // word count handle
             let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
-
             open_file(&word_count_upgraded_weak_handle);
-
-
         });
 
         word_count_window.run().unwrap();
 
         WordCountApp {
             files: Arc::new(Mutex::new(vec![])),
-            word_count_window: Arc::new(Mutex::new(word_count_window.clone_strong()))
+            word_count_window: Arc::new(Mutex::new(word_count_window.clone_strong())),
         }
     }
     fn add_file() {}
@@ -38,9 +33,8 @@ impl WordCountApp {
     }
 }
 
-
 pub fn open_file(word_count_upgraded_weak_handle: &WordCount) {
-    let mut counter_value= word_count_upgraded_weak_handle.get_counter();
+    let mut counter_value = word_count_upgraded_weak_handle.get_counter();
     let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
     let mut current_row = word_count_upgraded_weak_handle
@@ -52,8 +46,6 @@ pub fn open_file(word_count_upgraded_weak_handle: &WordCount) {
     word_count_upgraded_weak_handle.set_list_of_structs(array);
 
     println!("{}", current_row);
-
-
 
     // increment counter
     counter_value += 1;
