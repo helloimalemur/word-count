@@ -21,15 +21,18 @@ impl WordCountApp {
 
     pub fn config(&self) {
         let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
-        self.word_count_window.lock().unwrap().on_open_file_pressed(move || {
-            let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
-            open_file(&word_count_upgraded_weak_handle);
-        });
+        self.word_count_window
+            .lock()
+            .unwrap()
+            .on_open_file_pressed(move || {
+                let word_count_upgraded_weak_handle =
+                    word_count_window_weak_handle.upgrade().unwrap();
+                open_file(&word_count_upgraded_weak_handle);
+            });
         self.word_count_window.lock().unwrap().run().unwrap();
     }
 
     fn remove_file() {}
-
 }
 
 pub fn open_file(word_count_upgraded_weak_handle: &WordCount) {
