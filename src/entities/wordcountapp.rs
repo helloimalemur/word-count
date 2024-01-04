@@ -83,22 +83,22 @@ impl WordCountApp {
 
             });
 
-        // let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
-        // let mut files_guard = self.files.lock().unwrap();
-        // self.word_count_window
-        //     .lock()
-        //     .unwrap()
-        //     .on_re_calc_pressed(move || {
-        //         let word_count_upgraded_weak_handle =
-        //             word_count_window_weak_handle.upgrade().unwrap();
-        //         let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-        //         let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
-        //
-        //         println!("Vec size; {}", files_guard.len());
-        //         for (ind,file) in files_guard.iter().enumerate() {
-        //             println!("{}", file.full_file_contents);
-        //         }
-        //     });
+        let word_count_window_weak_handle = word_count_window.as_weak();
+        let files_bind = files.clone();
+        word_count_window
+            .on_re_calc_pressed(move || {
+                let guard = files_bind.clone();
+
+                let word_count_upgraded_weak_handle =
+                    word_count_window_weak_handle.upgrade().unwrap();
+                let mut counter_value = word_count_upgraded_weak_handle.get_counter();
+                let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+
+                println!("Vec size; {}", guard.lock().unwrap().len());
+                // for (ind,file) in guard.lock().unwrap().iter().enumerate() {
+                //     println!("{}", file.full_file_contents);
+                // }
+            });
     }
 
     pub fn load_file() {}
