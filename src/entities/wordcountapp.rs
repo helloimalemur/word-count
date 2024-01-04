@@ -3,7 +3,11 @@ use crate::ui::ui::WordCount;
 use chrono::Local;
 use slint::{ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Window, WindowSize};
 use std::fmt::format;
+use std::path::PathBuf;
 use std::sync::{Arc, Mutex, MutexGuard};
+use native_dialog::FileDialog;
+
+
 pub struct WordCountApp {
     pub files: Arc<Mutex<Vec<WordCountFile>>>,
     pub word_count_window: Arc<Mutex<WordCount>>,
@@ -12,6 +16,8 @@ pub struct WordCountApp {
 impl WordCountApp {
     pub fn new() -> WordCountApp {
         let word_count_window = WordCount::new().unwrap();
+
+
 
         WordCountApp {
             files: Arc::new(Mutex::new(vec![])),
@@ -30,22 +36,30 @@ impl WordCountApp {
                 let mut counter_value = word_count_upgraded_weak_handle.get_counter();
                 let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
-                let mut current_row = word_count_upgraded_weak_handle
-                    .get_list_of_structs()
-                    .row_count();
-                current_row = counter_value as usize;
-                let text = format!("text: {}", Local::now().timestamp());
-                array.set_row_data(current_row, (SharedString::from(text),));
-                word_count_upgraded_weak_handle.set_list_of_structs(array);
+                // let mut current_row = word_count_upgraded_weak_handle
+                //     .get_list_of_structs()
+                //     .row_count();
+                // current_row = counter_value as usize;
+                // let text = format!("text: {}", Local::now().timestamp());
+                // array.set_row_data(current_row, (SharedString::from(text),));
+                // word_count_upgraded_weak_handle.set_list_of_structs(array);
+                //
+                // println!("{}", current_row);
 
-                println!("{}", current_row);
+                if let Some(file) = show_open_dialog() {
+                    println!("{}", file.to_str().unwrap());
 
-                // increment counter
-                counter_value += 1;
-                if counter_value == 10 {
-                    counter_value = 0;
+
+                    // increment counter
+                    counter_value += 1;
+                    if counter_value == 10 {
+                        counter_value = 0;
+                    }
+                    word_count_upgraded_weak_handle.set_counter(counter_value);
                 }
-                word_count_upgraded_weak_handle.set_counter(counter_value);
+
+
+
             });
 
 
@@ -54,6 +68,17 @@ impl WordCountApp {
         self.word_count_window.lock().unwrap().run().unwrap();
     }
 
-    fn remove_file() {}
+    fn add_file(&self) {
+        let word_count_mutex_guard = self.word_count_window.lock().unwrap();
+        let mut number_of_files = word_count_mutex_guard.get_counter();
+    }
 
+}
+
+fn show_open_dialog() -> Option<PathBuf> {
+    FileDialog::new()
+        .set_location("~/Desktop")
+        .add_filter("PNG Image", &["docx"])
+        .show_open_single_file()
+        .unwrap()
 }
