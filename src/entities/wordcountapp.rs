@@ -47,6 +47,10 @@ impl WordCountApp {
                 }
                 word_count_upgraded_weak_handle.set_counter(counter_value);
             });
+
+
+
+
         self.word_count_window.lock().unwrap().run().unwrap();
     }
 
