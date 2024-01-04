@@ -15,6 +15,7 @@ slint::slint! {
             height: 600px;
             width: 800px;
             Rectangle {
+                padding: 50px;
                 open-file := Button {
                     height: 50px;
                     width: 200px;
