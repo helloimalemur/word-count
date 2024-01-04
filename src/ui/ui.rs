@@ -12,12 +12,12 @@ slint::slint! {
         in-out property<[{text: string}]> list-of-structs: [{text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, ];
 
         VerticalBox {
-            height: 400px;
-            width: 600px;
+            height: 600px;
+            width: 800px;
             Rectangle {
                 open-file := Button {
                     height: 50px;
-                    width: 80px;
+                    width: 200px;
                     text: "Open File (files open:" + root.counter +")";
                 }
             }
