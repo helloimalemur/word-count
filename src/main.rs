@@ -1,4 +1,4 @@
-use crate::entities::wordcountapp::WordCountApp;
+use crate::entities::wordcountapp::{run_calculations, WordCountApp};
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use slint::{ComponentHandle, Timer, TimerMode};
@@ -23,14 +23,14 @@ fn main() {
         .unwrap()
         .config(word_count_window.clone_strong(), files.clone());
 
+    // re-occuring
     let timer = Timer::default();
-    let moved_app = app.clone();
+    let app_bind = app.clone();
     timer.start(
         TimerMode::Repeated,
         std::time::Duration::from_millis(2000),
         move || {
-            // let _ = &moved_app.lock().unwrap().run_calculations();
-            println!("{}", 1);
+            run_calculations(files.clone());
         },
     );
 

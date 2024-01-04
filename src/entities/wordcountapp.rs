@@ -92,6 +92,7 @@ impl WordCountApp {
             let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
             println!("Vec size; {}", guard.lock().unwrap().len());
+
             // for (ind,file) in guard.lock().unwrap().iter().enumerate() {
             //     println!("{}", file.full_file_contents);
             // }
@@ -100,9 +101,11 @@ impl WordCountApp {
 
     pub fn load_file() {}
 
-    pub fn run_calculations(&self) {
-        println!("{}", 0);
-    }
+
+}
+
+pub fn run_calculations(files: Arc<Mutex<Vec<WordCountFile>>>) {
+    println!("Vec size: {}", files.lock().unwrap().len());
 }
 
 fn show_open_dialog() -> Option<PathBuf> {
