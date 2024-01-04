@@ -17,8 +17,6 @@ impl WordCountApp {
     pub fn new() -> WordCountApp {
         let word_count_window = WordCount::new().unwrap();
 
-
-
         WordCountApp {
             files: Arc::new(Mutex::new(vec![])),
             word_count_window: Arc::new(Mutex::new(word_count_window.clone_strong())),
@@ -71,7 +69,7 @@ impl WordCountApp {
                     unique_words: Default::default(),
                 };
 
-
+                // let files = self.files.lock().unwrap();
 
 
             });
