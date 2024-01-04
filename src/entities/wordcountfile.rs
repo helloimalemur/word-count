@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use chrono::{DateTime, Utc};
+use std::collections::HashMap;
 
 #[derive(Debug, Clone)]
 pub struct WordCountFile {
@@ -39,10 +39,9 @@ impl WordCountFile {
         //     let line = line?;
         //     total_size += line.as_bytes().len();
         //     word_count += line.split_whitespace().count();
-        }
+    }
     fn update_modified() {
         // if last modified is less than ?
         todo!()
     }
-
 }

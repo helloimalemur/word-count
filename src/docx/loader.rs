@@ -6,7 +6,9 @@ struct DocX {
 
 impl DocX {
     fn new() -> DocX {
-        DocX { contents: "".to_string() }
+        DocX {
+            contents: "".to_string(),
+        }
     }
     fn load(&mut self, path: String) {
         self.contents = "sdf".to_string();

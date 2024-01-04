@@ -1,19 +1,9 @@
-
 use crate::entities::wordcountapp::WordCountApp;
 
-
-mod ui;
-mod entities;
 mod docx;
+mod entities;
+mod ui;
 
 fn main() {
-    let app = WordCountApp::new();
-
-    println!("{:#?}", app.files);
-
-
-}
-
-fn button_pressed() {
-
+    let _app = WordCountApp::new();
 }
