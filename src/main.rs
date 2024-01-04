@@ -16,7 +16,7 @@ fn main() {
     let timer = Timer::default();
     let moved_app = app.clone();
     timer.start(TimerMode::Repeated, std::time::Duration::from_millis(2000), move || {
-        // moved_app.lock().unwrap().run_calculations();
+        // let _ = &moved_app.lock().unwrap().run_calculations();
         println!("{}", 1);
     });
 

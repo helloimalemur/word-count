@@ -8,6 +8,7 @@ slint::slint! {
         width: 800px;
         in-out property <int> counter: 0;
         callback open-file-pressed <=> open-file.clicked;
+        callback re-calc-pressed <=> re-calc.clicked;
 
         in-out property<[{text: string}]> list-of-structs: [{text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, ];
 
@@ -20,6 +21,14 @@ slint::slint! {
                     height: 50px;
                     width: 200px;
                     text: "Open File (files open:" + root.counter +")";
+                }
+            }
+            Rectangle {
+                padding: 50px;
+                re-calc := Button {
+                    height: 50px;
+                    width: 200px;
+                    text: "Recalculate";
                 }
             }
 

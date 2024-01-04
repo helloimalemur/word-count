@@ -29,7 +29,6 @@ impl WordCountApp {
         let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
         let mut files_guard = self.files.lock().unwrap().clone();
 
-
         self.word_count_window
             .lock()
             .unwrap()
@@ -79,9 +78,24 @@ impl WordCountApp {
 
 
             });
+
+        let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
+        let mut files_guard = self.files.lock().unwrap().clone();
+        self.word_count_window
+            .lock()
+            .unwrap()
+            .on_re_calc_pressed(move || {
+                let word_count_upgraded_weak_handle =
+                    word_count_window_weak_handle.upgrade().unwrap();
+                let mut counter_value = word_count_upgraded_weak_handle.get_counter();
+                let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+
+                println!("{}", 0);
+            });
     }
 
     pub fn load_file() {}
+
     pub fn run_calculations(&self) {
         println!("{}", 0);
     }
