@@ -51,6 +51,22 @@ impl WordCountApp {
                     println!("{}", file.to_str().unwrap());
 
 
+                    let new_file = WordCountFile {
+                        path: String::from(file.to_str().unwrap()),
+                        notes: "".to_string(),
+                        deadline: Default::default(),
+                        time_spent: 0,
+                        being_modified: false,
+                        word_count: 0,
+                        para_count: 0,
+                        unique_words: Default::default(),
+                    };
+
+                    files_guard.push(new_file);
+
+                    list_files(files_guard.clone());
+
+
                     // increment counter
                     counter_value += 1;
                     if counter_value == 10 {
@@ -60,22 +76,6 @@ impl WordCountApp {
                 }
 
 
-
-                let new_file = WordCountFile {
-                    path: "".to_string(),
-                    notes: "".to_string(),
-                    deadline: Default::default(),
-                    time_spent: 0,
-                    being_modified: false,
-                    word_count: 0,
-                    para_count: 0,
-                    unique_words: Default::default(),
-                };
-
-                files_guard.push(new_file);
-
-
-                list_files(files_guard.clone());
             });
     }
 
