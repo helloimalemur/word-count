@@ -15,8 +15,9 @@ fn main() {
 
     let timer = Timer::default();
     let moved_app = app.clone();
-    timer.start(TimerMode::Repeated, std::time::Duration::from_millis(200), move || {
+    timer.start(TimerMode::Repeated, std::time::Duration::from_millis(2000), move || {
         // moved_app.lock().unwrap().run_calculations();
+        println!("{}", 1);
     });
 
     app.lock().unwrap().word_count_window.lock().unwrap().run().unwrap();
