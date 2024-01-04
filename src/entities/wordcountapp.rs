@@ -25,6 +25,9 @@ impl WordCountApp {
 
     pub fn config(&self) {
         let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
+
+        let mut files_guard = self.files.lock().unwrap().clone();
+
         self.word_count_window
             .lock()
             .unwrap()
@@ -69,17 +72,19 @@ impl WordCountApp {
                     unique_words: Default::default(),
                 };
 
-                // let files = self.files.lock().unwrap();
+                files_guard.push(new_file);
 
 
             });
 
-
-
-
-        self.word_count_window.lock().unwrap().run().unwrap();
+        // self.word_count_window.lock().unwrap().run().unwrap();
     }
 
+
+    pub fn list_files(&self) {
+        let files = self.files.lock().unwrap();
+        println!("{:#?}", files);
+    }
 }
 
 fn show_open_dialog() -> Option<PathBuf> {
