@@ -4,6 +4,7 @@ use std::time::Duration;
 use slint::{ComponentHandle, Timer, TimerMode};
 use crate::entities::wordcountapp::WordCountApp;
 use crate::entities::wordcountfile::WordCountFile;
+use crate::ui::ui::WordCount;
 
 mod docx;
 mod entities;
@@ -11,9 +12,11 @@ mod ui;
 mod calculations;
 
 fn main() {
+    let word_count_window = WordCount::new().unwrap();
     let files: Arc<Mutex<Vec<WordCountFile>>> = Arc::new(Mutex::new(Vec::<WordCountFile>::new()));
-    let app = Arc::new(Mutex::new(WordCountApp::new(files)));
-    app.lock().unwrap().config();
+
+    let app = Arc::new(Mutex::new(WordCountApp::new(word_count_window.clone_strong(), files.clone())));
+    app.lock().unwrap().config(word_count_window.clone_strong(), files.clone());
 
     let timer = Timer::default();
     let moved_app = app.clone();

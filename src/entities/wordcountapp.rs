@@ -15,8 +15,8 @@ pub struct WordCountApp {
 }
 
 impl WordCountApp {
-    pub fn new(files: Arc<Mutex<Vec<WordCountFile>>>) -> WordCountApp {
-        let word_count_window = WordCount::new().unwrap();
+    pub fn new(word_count_window: WordCount, files: Arc<Mutex<Vec<WordCountFile>>>) -> WordCountApp {
+
 
 
         WordCountApp {
@@ -25,18 +25,22 @@ impl WordCountApp {
         }
     }
 
-    pub fn config(&self) {
-        let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
-        let mut files_guard = self.files.as_ref().lock().unwrap();
+    pub fn config(&self, word_count_window: WordCount, files: Arc<Mutex<Vec<WordCountFile>>>) {
+        let word_count_window_weak_handle = word_count_window.as_weak();
 
-        self.word_count_window
-            .lock()
-            .unwrap()
+        // let mut files_guard = files.lock().unwrap();
+
+        let files_bind = files.clone();
+        word_count_window
+            // .lock()
+            // .unwrap()
             .on_open_file_pressed(move || {
+                let mut guard = files_bind.lock().unwrap();
+
                 let word_count_upgraded_weak_handle =
                     word_count_window_weak_handle.upgrade().unwrap();
                 let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-                let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+                // let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
                 // let mut current_row = word_count_upgraded_weak_handle
                 //     .get_list_of_structs()
@@ -63,17 +67,17 @@ impl WordCountApp {
                         full_file_contents: read(file.to_str().unwrap().to_string()),
                     };
 
-                    // files_guard.push(new_file);
+                    guard.push(new_file);
 
-                    // list_files(files_guard.clone());
-                    //
-                    //
-                    // // increment counter
-                    // counter_value += 1;
-                    // if counter_value == 10 {
-                    //     counter_value = 0;
-                    // }
-                    // word_count_upgraded_weak_handle.set_counter(counter_value);
+                    list_files(guard.clone());
+
+
+                    // increment counter
+                    counter_value += 1;
+                    if counter_value == 10 {
+                        counter_value = 0;
+                    }
+                    word_count_upgraded_weak_handle.set_counter(counter_value);
                 }
 
 
