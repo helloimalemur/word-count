@@ -51,8 +51,6 @@ impl WordCountApp {
                 if let Some(file) = show_open_dialog() {
                     println!("{}", file.to_str().unwrap());
 
-                    let contents = read(file.to_str().unwrap().to_string());
-
                     let new_file = WordCountFile {
                         path: String::from(file.to_str().unwrap()),
                         notes: "".to_string(),
@@ -62,6 +60,7 @@ impl WordCountApp {
                         word_count: 0,
                         para_count: 0,
                         unique_words: Default::default(),
+                        full_file_contents: read(file.to_str().unwrap().to_string()),
                     };
 
                     files_guard.push(new_file);

@@ -11,6 +11,7 @@ pub struct WordCountFile {
     pub(crate) word_count: i128,
     pub(crate) para_count: i32,
     pub(crate) unique_words: HashMap<String, i32>,
+    pub(crate) full_file_contents: String,
 }
 
 impl WordCountFile {
@@ -24,6 +25,7 @@ impl WordCountFile {
             word_count: 0,
             para_count: 0,
             unique_words: Default::default(),
+            full_file_contents: "".to_string(),
         }
     }
     fn set_note() {}
