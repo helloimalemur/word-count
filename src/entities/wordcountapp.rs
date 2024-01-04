@@ -74,10 +74,10 @@ impl WordCountApp {
                     list_files(guard.clone());
 
                     // increment counter
-                    counter_value += 1;
-                    if counter_value == 10 {
-                        counter_value = 0;
-                    }
+                    counter_value = guard.len() as i32;
+                    // if counter_value == 10 {
+                    //     counter_value = 0;
+                    // }
                     word_count_upgraded_weak_handle.set_counter(counter_value);
                 }
             });
