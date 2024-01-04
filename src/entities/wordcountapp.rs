@@ -27,7 +27,7 @@ impl WordCountApp {
 
     pub fn config(&self) {
         let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
-        let mut files_guard = self.files.lock().unwrap();
+        let mut files_guard = self.files.as_ref().lock().unwrap();
 
         self.word_count_window
             .lock()
@@ -64,7 +64,7 @@ impl WordCountApp {
                     };
 
                     // files_guard.push(new_file);
-                    //
+
                     // list_files(files_guard.clone());
                     //
                     //
