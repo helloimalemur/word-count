@@ -1,3 +1,4 @@
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
 use slint::{ComponentHandle, Timer, TimerMode};
@@ -9,12 +10,14 @@ mod ui;
 mod calculations;
 
 fn main() {
-    let app = WordCountApp::new();
-    app.config();
+    let app = Arc::new(Mutex::new(WordCountApp::new()));
+    app.lock().unwrap().config();
 
     let timer = Timer::default();
+    let moved_app = app.clone();
     timer.start(TimerMode::Repeated, std::time::Duration::from_millis(200), move || {
-        println!("{}", 0);
+        // moved_app.lock().unwrap().run_calculations();
     });
-    app.word_count_window.lock().unwrap().run().unwrap();
+
+    app.lock().unwrap().word_count_window.lock().unwrap().run().unwrap();
 }
