@@ -15,12 +15,12 @@ pub struct WordCountApp {
 }
 
 impl WordCountApp {
-    pub fn new() -> WordCountApp {
+    pub fn new(files: Arc<Mutex<Vec<WordCountFile>>>) -> WordCountApp {
         let word_count_window = WordCount::new().unwrap();
 
 
         WordCountApp {
-            files: Arc::new(Mutex::new(vec![])),
+            files,
             word_count_window: Arc::new(Mutex::new(word_count_window.clone_strong())),
         }
     }
@@ -63,38 +63,38 @@ impl WordCountApp {
                         full_file_contents: read(file.to_str().unwrap().to_string()),
                     };
 
-                    files_guard.push(new_file);
-
-                    list_files(files_guard.clone());
-
-
-                    // increment counter
-                    counter_value += 1;
-                    if counter_value == 10 {
-                        counter_value = 0;
-                    }
-                    word_count_upgraded_weak_handle.set_counter(counter_value);
+                    // files_guard.push(new_file);
+                    //
+                    // list_files(files_guard.clone());
+                    //
+                    //
+                    // // increment counter
+                    // counter_value += 1;
+                    // if counter_value == 10 {
+                    //     counter_value = 0;
+                    // }
+                    // word_count_upgraded_weak_handle.set_counter(counter_value);
                 }
 
 
             });
 
-        let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
-        let mut files_guard = self.files.lock().unwrap();
-        self.word_count_window
-            .lock()
-            .unwrap()
-            .on_re_calc_pressed(move || {
-                let word_count_upgraded_weak_handle =
-                    word_count_window_weak_handle.upgrade().unwrap();
-                let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-                let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
-
-                println!("Vec size; {}", files_guard.len());
-                for (ind,file) in files_guard.iter().enumerate() {
-                    println!("{}", file.full_file_contents);
-                }
-            });
+        // let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
+        // let mut files_guard = self.files.lock().unwrap();
+        // self.word_count_window
+        //     .lock()
+        //     .unwrap()
+        //     .on_re_calc_pressed(move || {
+        //         let word_count_upgraded_weak_handle =
+        //             word_count_window_weak_handle.upgrade().unwrap();
+        //         let mut counter_value = word_count_upgraded_weak_handle.get_counter();
+        //         let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+        //
+        //         println!("Vec size; {}", files_guard.len());
+        //         for (ind,file) in files_guard.iter().enumerate() {
+        //             println!("{}", file.full_file_contents);
+        //         }
+        //     });
     }
 
     pub fn load_file() {}
