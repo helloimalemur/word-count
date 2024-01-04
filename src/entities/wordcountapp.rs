@@ -6,6 +6,7 @@ use std::fmt::format;
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex, MutexGuard};
 use native_dialog::FileDialog;
+use crate::docx::loader::read;
 
 
 pub struct WordCountApp {
@@ -50,6 +51,7 @@ impl WordCountApp {
                 if let Some(file) = show_open_dialog() {
                     println!("{}", file.to_str().unwrap());
 
+                    let contents = read(file.to_str().unwrap().to_string());
 
                     let new_file = WordCountFile {
                         path: String::from(file.to_str().unwrap()),
@@ -87,7 +89,7 @@ impl WordCountApp {
 fn show_open_dialog() -> Option<PathBuf> {
     FileDialog::new()
         .set_location("~/Desktop")
-        .add_filter("PNG Image", &["png"])
+        .add_filter("PNG Image", &["docx"])
         .show_open_single_file()
         .expect("could not open file dialog")
 }

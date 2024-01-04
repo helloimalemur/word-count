@@ -1,16 +1,13 @@
-use docx_rs::*;
+use std::io::Read;
+use dotext::{Docx, MsDoc};
 
-struct DocX {
-    contents: String,
-}
-
-impl DocX {
-    fn new() -> DocX {
-        DocX {
-            contents: "".to_string(),
-        }
-    }
-    fn load(&mut self, path: String) {
-        self.contents = "sdf".to_string();
-    }
+pub fn read(path: String) -> String {
+    let mut file = Docx::open(path).expect("could not load file");
+    let mut isi = String::new();
+    let _ = file.read_to_string(&mut isi);
+    println!("CONTENT:");
+    println!("----------BEGIN----------");
+    println!("{}", isi);
+    println!("----------EOF----------");
+    isi
 }
