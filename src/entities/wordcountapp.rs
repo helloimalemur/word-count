@@ -75,16 +75,12 @@ impl WordCountApp {
                 files_guard.push(new_file);
 
 
+                list_files(files_guard.clone());
             });
-
-        // self.word_count_window.lock().unwrap().run().unwrap();
     }
 
 
-    pub fn list_files(&self) {
-        let files = self.files.lock().unwrap();
-        println!("{:#?}", files);
-    }
+
 }
 
 fn show_open_dialog() -> Option<PathBuf> {
@@ -93,4 +89,8 @@ fn show_open_dialog() -> Option<PathBuf> {
         .add_filter("PNG Image", &["png"])
         .show_open_single_file()
         .expect("could not open file dialog")
+}
+
+pub fn list_files(vec: Vec<WordCountFile>) {
+    println!("{:#?}", vec);
 }
