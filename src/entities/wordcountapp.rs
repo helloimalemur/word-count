@@ -13,20 +13,28 @@ impl WordCountApp {
     pub fn new() -> WordCountApp {
         let word_count_window = WordCount::new().unwrap();
 
-        let word_count_window_weak_handle = word_count_window.as_weak();
-        word_count_window.on_open_file_pressed(move || {
-            let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
-            open_file(&word_count_upgraded_weak_handle);
-        });
+        // let word_count_window_weak_handle = word_count_window.as_weak();
+        // word_count_window.on_open_file_pressed(move || {
+        //     let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
+        //     open_file(&word_count_upgraded_weak_handle);
+        // });
 
-        word_count_window.run().unwrap();
+        // word_count_window.run().unwrap();
 
         WordCountApp {
             files: Arc::new(Mutex::new(vec![])),
             word_count_window: Arc::new(Mutex::new(word_count_window.clone_strong())),
         }
     }
-    fn add_file() {}
+    pub fn config(&self) {
+        let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
+        self.word_count_window.lock().unwrap().on_open_file_pressed(move || {
+            let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
+            open_file(&word_count_upgraded_weak_handle);
+        });
+        self.word_count_window.lock().unwrap().run().unwrap();
+    }
+
     fn remove_file() {}
     fn get_files(&self) -> Vec<WordCountFile> {
         self.files.lock().unwrap().clone()

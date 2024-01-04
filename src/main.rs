@@ -5,5 +5,6 @@ mod entities;
 mod ui;
 
 fn main() {
-    let _app = WordCountApp::new();
+    let app = WordCountApp::new();
+    app.config();
 }
