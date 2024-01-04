@@ -1,7 +1,7 @@
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use chrono::Local;
-use slint::{ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Window, WindowSize};
+use slint::{ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Timer, TimerMode, Window, WindowSize};
 use std::fmt::format;
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex, MutexGuard};
@@ -18,6 +18,7 @@ impl WordCountApp {
     pub fn new() -> WordCountApp {
         let word_count_window = WordCount::new().unwrap();
 
+
         WordCountApp {
             files: Arc::new(Mutex::new(vec![])),
             word_count_window: Arc::new(Mutex::new(word_count_window.clone_strong())),
@@ -26,8 +27,8 @@ impl WordCountApp {
 
     pub fn config(&self) {
         let word_count_window_weak_handle = self.word_count_window.lock().unwrap().as_weak();
-
         let mut files_guard = self.files.lock().unwrap().clone();
+
 
         self.word_count_window
             .lock()
@@ -81,7 +82,8 @@ impl WordCountApp {
     }
 
     pub fn load_file() {}
-    pub fn run_calculations() {}
+    pub fn run_calculations(&self) {
+    }
 
 }
 
