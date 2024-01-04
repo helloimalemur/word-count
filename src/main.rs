@@ -6,6 +6,7 @@ use crate::entities::wordcountapp::WordCountApp;
 mod docx;
 mod entities;
 mod ui;
+mod calculations;
 
 fn main() {
     let app = WordCountApp::new();
