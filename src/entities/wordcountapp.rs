@@ -79,7 +79,8 @@ impl WordCountApp {
             });
     }
 
-
+    pub fn load_file() {}
+    pub fn run_calculations() {}
 
 }
 
