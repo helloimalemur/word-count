@@ -3,10 +3,7 @@ use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use chrono::Local;
 use native_dialog::FileDialog;
-use slint::{
-    ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Timer, TimerMode, Window,
-    WindowSize,
-};
+use slint::{ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Timer, TimerMode, Weak, Window, WindowSize};
 use std::fmt::format;
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex, MutexGuard};
@@ -80,6 +77,24 @@ impl WordCountApp {
         let word_count_window_weak_handle = word_count_window.as_weak();
         let files_bind = files.clone();
         word_count_window.on_re_calc_pressed(move || {
+            let guard = files_bind.clone();
+
+            let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
+            let mut counter_value = word_count_upgraded_weak_handle.get_counter();
+            let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+
+            println!("Vec size; {}", guard.lock().unwrap().len());
+
+            // for (ind,file) in guard.lock().unwrap().iter().enumerate() {
+            //     println!("{}", file.full_file_contents);
+            // }
+        });
+
+
+
+        let word_count_window_weak_handle = word_count_window.as_weak();
+        let files_bind = files.clone();
+        word_count_window.on_clear_pressed(move || {
             let guard = files_bind.clone();
 
             let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();

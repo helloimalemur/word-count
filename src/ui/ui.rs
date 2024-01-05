@@ -9,6 +9,7 @@ slint::slint! {
         in-out property <int> counter: 0;
         callback open-file-pressed <=> open-file.clicked;
         callback re-calc-pressed <=> re-calc.clicked;
+        callback clear-pressed <=> clear.clicked;
 
         in-out property<[{text: string}]> list-of-structs: [{text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, ];
 
