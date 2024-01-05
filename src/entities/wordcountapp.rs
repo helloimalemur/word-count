@@ -3,7 +3,10 @@ use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use chrono::Local;
 use native_dialog::FileDialog;
-use slint::{ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Timer, TimerMode, Weak, Window, WindowSize};
+use slint::{
+    ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Timer, TimerMode, Weak, Window,
+    WindowSize,
+};
 use std::fmt::format;
 use std::ops::DerefMut;
 use std::path::PathBuf;
@@ -26,7 +29,6 @@ impl WordCountApp {
     }
 
     pub fn config(&mut self, word_count_window: WordCount, files: Arc<Mutex<Vec<WordCountFile>>>) {
-
         let word_count_window_weak_handle_open = word_count_window.as_weak();
         let mut files_bind_open = files.clone();
         word_count_window
@@ -51,7 +53,9 @@ impl WordCountApp {
                         word_count: 0,
                         para_count: 0,
                         unique_words: Default::default(),
-                        full_file_contents: read_docx_contents_to_string(file.to_str().unwrap().to_string()),
+                        full_file_contents: read_docx_contents_to_string(
+                            file.to_str().unwrap().to_string(),
+                        ),
                     };
 
                     // Add WordCountFile to Vec
@@ -63,7 +67,11 @@ impl WordCountApp {
                         .row_count();
                     // set current row as the next open place in the object array
                     current_row = guard.len() + 1usize;
-                    let text = format!("text: {} - WordCount: {}", new_file.path.clone(), new_file.word_count);
+                    let text = format!(
+                        "text: {} - WordCount: {}",
+                        new_file.path.clone(),
+                        new_file.word_count
+                    );
                     array.set_row_data(current_row, (SharedString::from(text),));
                     word_count_upgraded_weak_handle.set_list_of_structs(array);
                     // increment counter on gui
@@ -80,20 +88,18 @@ impl WordCountApp {
         word_count_window.on_re_calc_pressed(move || {
             let guard = files_bind_re_calc.clone();
 
-            let word_count_upgraded_weak_handle = word_count_window_weak_handle_re_calc.upgrade().unwrap();
+            let word_count_upgraded_weak_handle =
+                word_count_window_weak_handle_re_calc.upgrade().unwrap();
             let mut counter_value = word_count_upgraded_weak_handle.get_counter();
             let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
             println!("Vec size; {}", guard.lock().unwrap().len());
 
-
-            for (ind,file) in guard.lock().unwrap().iter_mut().enumerate() {
+            for (ind, file) in guard.lock().unwrap().iter_mut().enumerate() {
                 println!("{}", file.full_file_contents);
                 file.being_modified = true;
             }
         });
-
-
 
         let word_count_window_weak_handle = word_count_window.as_weak();
         let files_bind_clear = files.clone();
@@ -124,7 +130,6 @@ impl WordCountApp {
 
     pub fn load_file() {}
 }
-
 
 pub fn run_calculations(files: Arc<Mutex<Vec<WordCountFile>>>) {
     println!("Vec size: {}", files.lock().unwrap().len());

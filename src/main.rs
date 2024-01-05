@@ -34,11 +34,9 @@ fn main() {
         move || {
             run_calculations(files.clone());
 
-
             let mut guard = files_binding.lock().unwrap();
             let word_count_window_weak_handle = word_count_window.as_weak();
-            let word_count_upgraded_weak_handle =
-                word_count_window_weak_handle.upgrade().unwrap();
+            let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
             let mut counter_value = word_count_upgraded_weak_handle.get_counter();
             let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
@@ -56,7 +54,6 @@ fn main() {
             //     counter_value = guard.len() as i32;
             //     word_count_upgraded_weak_handle.set_counter(counter_value);
             // }
-
 
             word_count_window.window().request_redraw();
         },
