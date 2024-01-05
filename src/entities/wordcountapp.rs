@@ -42,17 +42,7 @@ impl WordCountApp {
                 let word_count_upgraded_weak_handle =
                     word_count_window_weak_handle.upgrade().unwrap();
                 let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-                // let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
-
-                // let mut current_row = word_count_upgraded_weak_handle
-                //     .get_list_of_structs()
-                //     .row_count();
-                // current_row = counter_value as usize;
-                // let text = format!("text: {}", Local::now().timestamp());
-                // array.set_row_data(current_row, (SharedString::from(text),));
-                // word_count_upgraded_weak_handle.set_list_of_structs(array);
-                //
-                // println!("{}", current_row);
+                let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
                 if let Some(file) = show_open_dialog() {
                     println!("{}", file.to_str().unwrap());
@@ -68,6 +58,18 @@ impl WordCountApp {
                         unique_words: Default::default(),
                         full_file_contents: read(file.to_str().unwrap().to_string()),
                     };
+
+
+                    let mut current_row = word_count_upgraded_weak_handle
+                        .get_list_of_structs()
+                        .row_count();
+                    current_row = counter_value as usize;
+                    let text = format!("text: {}", Local::now().timestamp());
+                    array.set_row_data(current_row, (SharedString::from(new_file.path.clone()),));
+                    word_count_upgraded_weak_handle.set_list_of_structs(array);
+
+                    println!("{}", current_row);
+
 
                     guard.push(new_file);
 

@@ -4,38 +4,43 @@ slint::slint! {
     export component WordCount inherits Window {
         title: "Word Count";
 
-        height: 600px;
-        width: 800px;
+        height: 500px;
+        width: 600px;
         in-out property <int> counter: 0;
         callback open-file-pressed <=> open-file.clicked;
         callback re-calc-pressed <=> re-calc.clicked;
 
         in-out property<[{text: string}]> list-of-structs: [{text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, ];
 
-        VerticalBox {
-            height: 600px;
-            width: 800px;
-            Rectangle {
-                padding: 50px;
-                open-file := Button {
-                    height: 50px;
-                    width: 200px;
-                    text: "Open File (files open:" + root.counter +")";
+        VerticalLayout {
+            HorizontalBox {
+                height: 100px;
+                width: 600px;
+                Rectangle {
+                    open-file := Button {
+                        text: "Open File (files open:" + root.counter +")";
+                    }
+                }
+                Rectangle {
+                    re-calc := Button {
+                        text: "Recalculate";
+                    }
+                }
+                Rectangle {
+                    clear := Button {
+                        text: "Clear";
+                    }
                 }
             }
-            Rectangle {
-                padding: 50px;
-                re-calc := Button {
-                    height: 50px;
-                    width: 200px;
-                    text: "Recalculate";
-                }
-            }
-
-
-            VerticalLayout {
-                for data in root.list-of-structs: my-repeated-text := Text {
-                    text: data.text;
+            HorizontalBox {
+                width: 600px;
+                height: 400px;
+                Rectangle {
+                    VerticalLayout {
+                        for data in root.list-of-structs: my-repeated-text := Text {
+                            text: data.text;
+                        }
+                    }
                 }
             }
         }
