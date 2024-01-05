@@ -11,6 +11,7 @@ use std::fmt::format;
 use std::ops::DerefMut;
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex, MutexGuard};
+use slint::WindowSize::Logical;
 
 pub struct WordCountApp {
     pub files: Arc<Mutex<Vec<WordCountFile>>>,
@@ -131,11 +132,48 @@ impl WordCountApp {
     pub fn load_file() {}
 }
 
-pub fn run_calculations(files: Arc<Mutex<Vec<WordCountFile>>>) {
+pub fn run_calculations(mut files: Arc<Mutex<Vec<WordCountFile>>>, count: WordCount) {
+    let word_count_upgraded_weak_handle = count.as_weak();
     println!("Vec size: {}", files.lock().unwrap().len());
-    // for (ind,file) in files.lock().iter_mut().enumerate() {
-    //     file.remove(ind)
-    // }
+
+    let guard = files.clone();
+    let array = word_count_upgraded_weak_handle.unwrap().get_list_of_structs();
+    let mut counter_value = word_count_upgraded_weak_handle.unwrap().get_counter();
+
+    let mut new_files = files.lock().unwrap().clone();
+
+    for (ind,file) in new_files.iter_mut().enumerate() {
+
+        let word_count = Local::now().timestamp();
+        file.word_count = word_count as i128;
+        // let _ = file.
+
+
+        // Update Gui "Table"
+        let mut current_row = word_count_upgraded_weak_handle
+            .unwrap()
+            .get_list_of_structs()
+            .row_count();
+        // set current row as the next open place in the object array
+        current_row = guard.lock().unwrap().len() + 1usize;
+        let text = format!(
+            "text: {} - WordCount: {}",
+            file.path.clone(),
+            file.word_count
+        );
+        array.set_row_data(current_row, (SharedString::from(text),));
+        // increment counter on gui
+        counter_value = guard.lock().unwrap().len() as i32;
+
+        println!("{:?}", file)
+    }
+
+
+
+    word_count_upgraded_weak_handle.unwrap().set_list_of_structs(array);
+    word_count_upgraded_weak_handle.unwrap().set_counter(counter_value);
+
+    files = Arc::new(Mutex::new(new_files));
 }
 
 fn show_open_dialog() -> Option<PathBuf> {

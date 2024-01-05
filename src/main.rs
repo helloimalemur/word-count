@@ -32,7 +32,7 @@ fn main() {
         TimerMode::Repeated,
         std::time::Duration::from_millis(2000),
         move || {
-            run_calculations(files.clone());
+            run_calculations(files.clone(), word_count_window.clone_strong());
 
             let mut guard = files_binding.lock().unwrap();
             let word_count_window_weak_handle = word_count_window.as_weak();
