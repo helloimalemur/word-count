@@ -1,4 +1,4 @@
-use crate::docx::loader::read;
+use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use chrono::Local;
@@ -30,12 +30,9 @@ impl WordCountApp {
     pub fn config(&self, word_count_window: WordCount, files: Arc<Mutex<Vec<WordCountFile>>>) {
         let word_count_window_weak_handle = word_count_window.as_weak();
 
-        // let mut files_guard = files.lock().unwrap();
-
         let files_bind = files.clone();
         word_count_window
-            // .lock()
-            // .unwrap()
+            // OPEN FILE BUTTON
             .on_open_file_pressed(move || {
                 let mut guard = files_bind.lock().unwrap();
 
@@ -56,31 +53,27 @@ impl WordCountApp {
                         word_count: 0,
                         para_count: 0,
                         unique_words: Default::default(),
-                        full_file_contents: read(file.to_str().unwrap().to_string()),
+                        full_file_contents: read_docx_contents_to_string(file.to_str().unwrap().to_string()),
                     };
 
+                    // Add WordCountFile to Vec
+                    guard.push(new_file.clone());
 
+                    // Update Gui "Table"
                     let mut current_row = word_count_upgraded_weak_handle
                         .get_list_of_structs()
                         .row_count();
-                    current_row = counter_value as usize;
-                    let text = format!("text: {}", Local::now().timestamp());
-                    array.set_row_data(current_row, (SharedString::from(new_file.path.clone()),));
+                    // set current row as the next open place in the object array
+                    current_row = guard.len() + 1usize;
+                    let text = format!("text: {} - WordCount: {}", new_file.path.clone(), new_file.word_count);
+                    array.set_row_data(current_row, (SharedString::from(text),));
                     word_count_upgraded_weak_handle.set_list_of_structs(array);
-
-                    println!("{}", current_row);
-
-
-                    guard.push(new_file);
-
-                    list_files(guard.clone());
-
-                    // increment counter
+                    // increment counter on gui
                     counter_value = guard.len() as i32;
-                    // if counter_value == 10 {
-                    //     counter_value = 0;
-                    // }
                     word_count_upgraded_weak_handle.set_counter(counter_value);
+
+                    // Debugging
+                    // list_files(guard.clone());
                 }
             });
 
