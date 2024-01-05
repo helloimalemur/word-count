@@ -134,7 +134,6 @@ impl WordCountApp {
 
 pub fn run_calculations(mut files: Arc<Mutex<Vec<WordCountFile>>>, count: WordCount) {
     let word_count_upgraded_weak_handle = count.as_weak();
-    println!("Vec size: {}", files.lock().unwrap().len());
 
     let guard = files.clone();
     let array = word_count_upgraded_weak_handle.unwrap().get_list_of_structs();
