@@ -11,9 +11,11 @@ mod ui;
 
 fn main() {
     let word_count_window = WordCount::new().unwrap();
-    let files: Arc<Mutex<Vec<WordCountFile>>> = Arc::new(Mutex::new(Vec::<WordCountFile>::new()));
 
-    let app = Arc::new(Mutex::new(WordCountApp::new(
+    let mut vec = Vec::<WordCountFile>::new();
+    let files: Arc<Mutex<Vec<WordCountFile>>> = Arc::new(Mutex::new(vec));
+
+    let mut app = Arc::new(Mutex::new(WordCountApp::new(
         word_count_window.clone_strong(),
         files.clone(),
     )));
