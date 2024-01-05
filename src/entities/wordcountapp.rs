@@ -128,6 +128,9 @@ impl WordCountApp {
 
 pub fn run_calculations(files: Arc<Mutex<Vec<WordCountFile>>>) {
     println!("Vec size: {}", files.lock().unwrap().len());
+    // for (ind,file) in files.lock().iter_mut().enumerate() {
+    //     file.remove(ind)
+    // }
 }
 
 fn show_open_dialog() -> Option<PathBuf> {
