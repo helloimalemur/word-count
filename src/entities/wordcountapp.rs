@@ -182,7 +182,7 @@ pub fn run_calculations(mut files: Arc<Mutex<Vec<WordCountFile>>>, count: WordCo
 fn show_open_dialog() -> Option<PathBuf> {
     FileDialog::new()
         .set_location("~/Desktop")
-        .add_filter("docx", &["docx"])
+        .add_filter("docx", &["docx", "*.docx"])
         .show_open_single_file()
         .expect("could not open file dialog")
 }
