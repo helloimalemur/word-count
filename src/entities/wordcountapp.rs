@@ -34,21 +34,7 @@ impl WordCountApp {
 
                 if let Some(file) = show_open_dialog() {
                     println!("{}", file.to_str().unwrap());
-
-                    let mut new_file = WordCountFile {
-                        path: String::from(file.to_str().unwrap()),
-                        notes: "".to_string(),
-                        deadline: Default::default(),
-                        time_spent: 0,
-                        being_modified: false,
-                        word_count: 0,
-                        para_count: 0,
-                        unique_words: Default::default(),
-                        full_file_contents: read_docx_contents_to_string(
-                            file.to_str().unwrap().to_string(),
-                        ),
-                    };
-
+                    let mut new_file = WordCountFile::new(String::from(file.to_str().unwrap()));
                     // Add WordCountFile to Vec
                     guard.push(new_file.clone());
                 }

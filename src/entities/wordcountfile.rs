@@ -15,7 +15,7 @@ pub struct WordCountFile {
 }
 
 impl WordCountFile {
-    fn new(path: String) -> WordCountFile {
+    pub fn new(path: String) -> WordCountFile {
         WordCountFile {
             path,
             notes: "".to_string(),
