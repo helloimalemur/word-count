@@ -49,7 +49,7 @@ fn main() {
                 let text = format!(
                     "text: {} - WordCount: {}",
                     ent.path.clone(),
-                    Local::now().timestamp()
+                    calculations::calculations::get_word_count(ent.full_file_contents.to_string())
                 );
                 array.set_row_data(ind, (SharedString::from(text),));
             }
