@@ -3,6 +3,7 @@ use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use slint::{ComponentHandle, SharedString, SharedVector, Timer, TimerMode};
 use std::sync::{Arc, Mutex};
+use chrono::Local;
 
 mod calculations;
 mod docx;
@@ -48,7 +49,7 @@ fn main() {
                 let text = format!(
                     "text: {} - WordCount: {}",
                     ent.path.clone(),
-                    ent.word_count
+                    Local::now().timestamp()
                 );
                 array.set_row_data(ind, (SharedString::from(text),));
             }
