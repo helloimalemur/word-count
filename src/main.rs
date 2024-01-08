@@ -46,6 +46,9 @@ fn main() {
             let mut bind = guard.clone();
             println!("{}", bind.len());
             for (ind, ent) in bind.iter_mut().enumerate() {
+                // reload file contents
+                ent.full_file_contents = read_docx_contents_to_string(ent.path.to_string());
+
                 let text = format!(
                     "text: {} - WordCount: {}",
                     ent.path.clone(),
