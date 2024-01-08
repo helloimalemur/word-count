@@ -1,5 +1,15 @@
 # word-count
 
+## This is a work in progress!
+
+### A writer's Word count application.
+    For keeping track of the word-count in multiple .docx files at the same time.
+    While also providing additional information.
+
+## Development and Collaboration
+#### Feel free to open a pull request, please run the following prior to your submission please!
+    echo "Run clippy"; cargo clippy -- -D clippy::all
+    echo "Format source code"; cargo fmt -- --check
 
 ### Misc
     Why the dialogs look ugly/blurry on Windows?
