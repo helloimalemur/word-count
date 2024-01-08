@@ -40,7 +40,7 @@ impl WordCountApp {
             });
 
         // RECALCULATE BUTTON
-        let mut files_bind_re_calc = files.clone();
+        let files_bind_re_calc = files.clone();
         word_count_window.on_re_calc_pressed(move || {
             let guard = files_bind_re_calc.clone();
 
