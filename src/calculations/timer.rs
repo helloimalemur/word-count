@@ -5,37 +5,38 @@ use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::slint_ui::WordCount;
 use slint::{Model, SharedString, Weak};
 use std::sync::{Mutex};
+use os_info::Type;
 
 pub fn run_timer(
     files_bind_open: Rc<Mutex<Vec<WordCountFile>>>,
     word_count_window_weak_handle_open: Weak<WordCount>,
 ) {
-    let mut guard = files_bind_open.lock().unwrap();
+    let guard = files_bind_open.lock().unwrap();
     let word_count_upgraded_weak_handle = word_count_window_weak_handle_open.upgrade().unwrap();
 
     // let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-    let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+    let array = word_count_upgraded_weak_handle.get_list_of_structs();
 
     let mut bind = guard.clone();
     println!("{}", bind.len());
     for (ind, ent) in bind.iter_mut().enumerate() {
         // reload file contents
         ent.full_file_contents = read_docx_contents_to_string(ent.path.to_string());
-        let mut path = String::new();
-        let path_posix = ent.path.split('/').last();
-        let path_win = ent.path.split('\\').last();
 
-        if path_posix.is_some() {
-            path = path_posix.unwrap().to_string();
-        } else {
-            path = path_win.unwrap().to_string();
-        }
+        // get file name only
+        let info = os_info::get();
+        let path: String = match info.os_type() {
+            Type::Windows => ent.path.split('\\').last().unwrap(),
+            _ => ent.path.split('/').last().unwrap()
+        }.to_string();
 
         let text = format!(
             "{} - WordCount: {}",
             path,
             calculations::counts::get_word_count(ent.full_file_contents.to_string())
         );
+
+        // update gui
         array.set_row_data(ind, (SharedString::from(text),));
     }
 
