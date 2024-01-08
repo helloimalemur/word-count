@@ -31,11 +31,17 @@ pub fn run_timer(
             _ => ent.path.split('/').last().unwrap()
         }.to_string();
 
+        // get calculcations
+        let word_count = calculations::counts::get_word_count(ent.full_file_contents.to_string());
+        let unique_word_count = calculations::counts::get_unique_words(ent.full_file_contents.to_string());
+
+
         // create gui text output
         let text = format!(
-            "{} - WordCount: {}",
+            "{} - WordCount: {}, Unique_words: {}",
             path,
-            calculations::counts::get_word_count(ent.full_file_contents.to_string())
+            word_count,
+            unique_word_count
         );
 
         // update gui row data
