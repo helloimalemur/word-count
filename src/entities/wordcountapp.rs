@@ -6,25 +6,26 @@ use slint::{ComponentHandle, Model, SharedString};
 
 use std::ops::DerefMut;
 use std::path::PathBuf;
+use std::rc::Rc;
 use std::sync::{Arc, Mutex};
 
 pub struct WordCountApp {
-    pub files: Arc<Mutex<Vec<WordCountFile>>>,
-    pub word_count_window: Arc<Mutex<WordCount>>,
+    pub files: Rc<Mutex<Vec<WordCountFile>>>,
+    pub word_count_window: Rc<Mutex<WordCount>>,
 }
 
 impl WordCountApp {
     pub fn new(
         word_count_window: WordCount,
-        files: Arc<Mutex<Vec<WordCountFile>>>,
+        files: Rc<Mutex<Vec<WordCountFile>>>,
     ) -> WordCountApp {
         WordCountApp {
             files,
-            word_count_window: Arc::new(Mutex::new(word_count_window.clone_strong())),
+            word_count_window: Rc::new(Mutex::new(word_count_window.clone_strong())),
         }
     }
 
-    pub fn config(&mut self, word_count_window: WordCount, files: Arc<Mutex<Vec<WordCountFile>>>) {
+    pub fn config(&mut self, word_count_window: WordCount, files: Rc<Mutex<Vec<WordCountFile>>>) {
         let mut files_bind_open = files.clone();
         word_count_window
             // OPEN FILE BUTTON

@@ -1,2 +1,2 @@
-pub mod calculations;
+pub mod counts;
 pub mod timer;

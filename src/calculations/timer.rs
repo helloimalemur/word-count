@@ -1,3 +1,4 @@
+use std::rc::Rc;
 use crate::calculations;
 use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
@@ -6,7 +7,7 @@ use slint::{Model, SharedString, Weak};
 use std::sync::{Arc, Mutex};
 
 pub fn run_timer(
-    files_bind_open: Arc<Mutex<Vec<WordCountFile>>>,
+    files_bind_open: Rc<Mutex<Vec<WordCountFile>>>,
     word_count_window_weak_handle_open: Weak<WordCount>,
 ) {
     let mut guard = files_bind_open.lock().unwrap();
@@ -33,7 +34,7 @@ pub fn run_timer(
         let text = format!(
             "{} - WordCount: {}",
             path,
-            calculations::calculations::get_word_count(ent.full_file_contents.to_string())
+            calculations::counts::get_word_count(ent.full_file_contents.to_string())
         );
         array.set_row_data(ind, (SharedString::from(text),));
     }

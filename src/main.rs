@@ -14,8 +14,8 @@ use slint::Model;
 fn main() {
     let word_count_window = WordCount::new().unwrap();
 
-    let mut files: Arc<Mutex<Vec<WordCountFile>>> =
-        Arc::new(Mutex::new(Vec::<WordCountFile>::new()));
+    let mut files: Rc<Mutex<Vec<WordCountFile>>> =
+        Rc::new(Mutex::new(Vec::<WordCountFile>::new()));
 
     let mut app = Rc::new(Mutex::new(WordCountApp::new(
         word_count_window.clone_strong(),
