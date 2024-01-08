@@ -125,55 +125,6 @@ impl WordCountApp {
     pub fn load_file() {}
 }
 
-pub fn run_calculations(mut files: Arc<Mutex<Vec<WordCountFile>>>, count: WordCount) {
-    let guard = files.clone();
-
-
-    let word_count_upgraded_weak_handle = count.as_weak();
-
-    let array = word_count_upgraded_weak_handle
-        .unwrap()
-        .get_list_of_structs();
-    let mut counter_value = word_count_upgraded_weak_handle.unwrap().get_counter();
-
-    let mut new_files = files.lock().unwrap().clone(); // create copy of Vec since we can't hold onto the lock this long
-
-    for (ind, file) in new_files.iter_mut().enumerate() {
-        let word_count = Local::now().timestamp();
-        file.word_count = word_count as i128;
-        // let _ = file.
-
-        // Update Gui "Table"
-        let mut current_row = word_count_upgraded_weak_handle
-            .unwrap()
-            .get_list_of_structs()
-            .row_count();
-        // set current row as the next open place in the object array
-        current_row = guard.lock().unwrap().len() + 1usize;
-        let text = format!(
-            "text: {} - WordCount: {}",
-            file.path.clone(),
-            file.word_count
-        );
-        array.set_row_data(current_row, (SharedString::from(text),));
-        // increment counter on gui
-        counter_value = guard.lock().unwrap().len() as i32;
-
-        println!("{:?}", file)
-    }
-
-    word_count_upgraded_weak_handle
-        .unwrap()
-        .set_list_of_structs(array);
-    word_count_upgraded_weak_handle
-        .unwrap()
-        .set_counter(counter_value);
-
-    files = Arc::new(Mutex::new(new_files)); // overwrite original Vec with new Vec
-                                             // since we cannot hold a lock on the original during the course of this loop
-                                             // without causing blocking behaviour
-}
-
 fn show_open_dialog() -> Option<PathBuf> {
     FileDialog::new()
         .add_filter("docx", &["docx"])

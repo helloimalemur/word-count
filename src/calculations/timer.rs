@@ -18,10 +18,19 @@ pub fn run_timer(files_bind_open: Arc<Mutex<Vec<WordCountFile>>>, word_count_win
     for (ind, ent) in bind.iter_mut().enumerate() {
         // reload file contents
         ent.full_file_contents = read_docx_contents_to_string(ent.path.to_string());
+        let mut path = String::new();
+        let path_posix = ent.path.split('/').last();
+        let path_win = ent.path.split('\\').last();
+
+        if path_posix.is_some() {
+            path = path_posix.unwrap().to_string();
+        } else {
+            path = path_win.unwrap().to_string();
+        }
 
         let text = format!(
-            "text: {} - WordCount: {}",
-            ent.path.clone(),
+            "{} - WordCount: {}",
+            path,
             calculations::calculations::get_word_count(ent.full_file_contents.to_string())
         );
         array.set_row_data(ind, (SharedString::from(text),));

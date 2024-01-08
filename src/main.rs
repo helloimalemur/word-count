@@ -1,4 +1,4 @@
-use crate::entities::wordcountapp::{run_calculations, WordCountApp};
+use crate::entities::wordcountapp::{WordCountApp};
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use slint::{ComponentHandle, SharedString, SharedVector, Timer, TimerMode};
