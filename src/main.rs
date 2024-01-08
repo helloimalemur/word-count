@@ -1,22 +1,19 @@
 use crate::entities::wordcountapp::{WordCountApp};
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
-use slint::{ComponentHandle, SharedString, SharedVector, Timer, TimerMode};
+use slint::{ComponentHandle, Timer, TimerMode};
 use std::sync::{Arc, Mutex};
-use chrono::Local;
 
 mod calculations;
 mod docx;
 mod entities;
 mod ui;
 use slint::Model;
-use crate::docx::loader::read_docx_contents_to_string;
 
 fn main() {
     let word_count_window = WordCount::new().unwrap();
 
-    let mut vec = Vec::<WordCountFile>::new();
-    let files: Arc<Mutex<Vec<WordCountFile>>> = Arc::new(Mutex::new(vec));
+    let mut files: Arc<Mutex<Vec<WordCountFile>>> = Arc::new(Mutex::new(Vec::<WordCountFile>::new()));
 
     let mut app = Arc::new(Mutex::new(WordCountApp::new(
         word_count_window.clone_strong(),
