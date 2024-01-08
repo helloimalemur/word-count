@@ -1,1 +1,1 @@
-pub mod ui;
+pub mod slint_ui;

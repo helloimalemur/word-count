@@ -1,7 +1,7 @@
 use crate::calculations;
 use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
-use crate::ui::ui::WordCount;
+use crate::ui::slint_ui::WordCount;
 use slint::{Model, SharedString, Weak};
 use std::sync::{Arc, Mutex};
 

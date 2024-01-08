@@ -1,6 +1,6 @@
 use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
-use crate::ui::ui::WordCount;
+use crate::ui::slint_ui::WordCount;
 use native_dialog::FileDialog;
 use slint::{ComponentHandle, Model, SharedString};
 
@@ -59,7 +59,7 @@ impl WordCountApp {
 
             println!("Vec size; {}", guard.lock().unwrap().len());
 
-            for (_ind, file) in guard.lock().unwrap().iter_mut().enumerate() {
+            for file in guard.lock().unwrap().iter_mut() {
                 println!("{}", file.full_file_contents);
                 file.being_modified = true;
             }
