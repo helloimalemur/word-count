@@ -41,7 +41,4 @@ pub fn run_timer(
         // update gui row data
         array.set_row_data(ind, (SharedString::from(text),));
     }
-
-    // push new gui data to gui state
-    // word_count_upgraded_weak_handle.set_list_of_structs(array);
 }
