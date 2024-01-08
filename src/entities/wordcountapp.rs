@@ -1,4 +1,3 @@
-use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::slint_ui::WordCount;
 use native_dialog::FileDialog;
@@ -7,7 +6,7 @@ use slint::{ComponentHandle, Model, SharedString};
 use std::ops::DerefMut;
 use std::path::PathBuf;
 use std::rc::Rc;
-use std::sync::{Arc, Mutex};
+use std::sync::{Mutex};
 
 pub struct WordCountApp {
     pub files: Rc<Mutex<Vec<WordCountFile>>>,

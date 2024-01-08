@@ -3,13 +3,12 @@ use crate::entities::wordcountapp::WordCountApp;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::slint_ui::WordCount;
 use slint::{ComponentHandle, Timer, TimerMode};
-use std::sync::{Arc, Mutex};
+use std::sync::{Mutex};
 
 mod calculations;
 mod docx;
 mod entities;
 mod ui;
-use slint::Model;
 
 fn main() {
     let word_count_window = WordCount::new().unwrap();

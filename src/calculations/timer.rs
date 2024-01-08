@@ -4,7 +4,7 @@ use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::slint_ui::WordCount;
 use slint::{Model, SharedString, Weak};
-use std::sync::{Arc, Mutex};
+use std::sync::{Mutex};
 
 pub fn run_timer(
     files_bind_open: Rc<Mutex<Vec<WordCountFile>>>,
