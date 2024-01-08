@@ -43,5 +43,5 @@ pub fn run_timer(
     }
 
     // push new gui data to gui state
-    word_count_upgraded_weak_handle.set_list_of_structs(array);
+    // word_count_upgraded_weak_handle.set_list_of_structs(array);
 }
