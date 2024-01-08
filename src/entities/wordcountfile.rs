@@ -3,15 +3,15 @@ use std::collections::HashMap;
 
 #[derive(Debug, Clone)]
 pub struct WordCountFile {
-    pub(crate) path: String,
-    pub(crate) notes: String,
-    pub(crate) deadline: DateTime<Utc>,
-    pub(crate) time_spent: i128,
-    pub(crate) being_modified: bool,
-    pub(crate) word_count: i128,
-    pub(crate) para_count: i32,
-    pub(crate) unique_words: HashMap<String, i32>,
-    pub(crate) full_file_contents: String,
+    pub path: String,
+    pub notes: String,
+    pub deadline: DateTime<Utc>,
+    pub time_spent: i128,
+    pub being_modified: bool,
+    pub word_count: i128,
+    pub para_count: i32,
+    pub unique_words: HashMap<String, i32>,
+    pub full_file_contents: String,
 }
 
 impl WordCountFile {

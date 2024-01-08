@@ -2,9 +2,7 @@ use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
 use native_dialog::FileDialog;
-use slint::{
-    ComponentHandle, Model, SharedString
-};
+use slint::{ComponentHandle, Model, SharedString};
 
 use std::ops::DerefMut;
 use std::path::PathBuf;
