@@ -18,7 +18,8 @@ pub fn run_timer(
     let array = word_count_upgraded_weak_handle.get_list_of_structs();
 
     let mut bind = guard.clone();
-    println!("{}", bind.len());
+
+    // for each file in the Vec
     for (ind, ent) in bind.iter_mut().enumerate() {
         // reload file contents
         ent.full_file_contents = read_docx_contents_to_string(ent.path.to_string());
@@ -30,15 +31,17 @@ pub fn run_timer(
             _ => ent.path.split('/').last().unwrap()
         }.to_string();
 
+        // create gui text output
         let text = format!(
             "{} - WordCount: {}",
             path,
             calculations::counts::get_word_count(ent.full_file_contents.to_string())
         );
 
-        // update gui
+        // update gui row data
         array.set_row_data(ind, (SharedString::from(text),));
     }
 
+    // push new gui data to gui state
     word_count_upgraded_weak_handle.set_list_of_structs(array);
 }
