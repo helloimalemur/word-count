@@ -36,10 +36,10 @@ impl WordCountApp {
             // OPEN FILE BUTTON
             .on_open_file_pressed(move || {
                 let mut guard = files_bind_open.lock().unwrap();
-
                 let word_count_upgraded_weak_handle =
                     word_count_window_weak_handle_open.upgrade().unwrap();
-                let mut counter_value = word_count_upgraded_weak_handle.get_counter();
+
+                // let mut counter_value = word_count_upgraded_weak_handle.get_counter();
                 let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
                 if let Some(file) = show_open_dialog() {
@@ -62,25 +62,18 @@ impl WordCountApp {
                     // Add WordCountFile to Vec
                     guard.push(new_file.clone());
 
-                    // Update Gui "Table"
-                    let mut current_row = word_count_upgraded_weak_handle
-                        .get_list_of_structs()
-                        .row_count();
-                    // set current row as the next open place in the object array
-                    current_row = guard.len() + 1usize;
-                    let text = format!(
-                        "text: {} - WordCount: {}",
-                        new_file.path.clone(),
-                        new_file.word_count
-                    );
-                    array.set_row_data(current_row, (SharedString::from(text),));
-                    word_count_upgraded_weak_handle.set_list_of_structs(array);
-                    // increment counter on gui
-                    counter_value = guard.len() as i32;
-                    word_count_upgraded_weak_handle.set_counter(counter_value);
+                    let mut bind = guard.clone();
+                    for (ind, ent) in bind.iter_mut().enumerate() {
+                        let text = format!(
+                            "text: {} - WordCount: {}",
+                            ent.path.clone(),
+                            ent.word_count
+                        );
+                        array.set_row_data(ind, (SharedString::from(text),));
+                    }
 
-                    // Debugging
-                    // list_files(guard.clone());
+                    word_count_upgraded_weak_handle.set_list_of_structs(array);
+
                 }
             });
 
@@ -133,9 +126,11 @@ impl WordCountApp {
 }
 
 pub fn run_calculations(mut files: Arc<Mutex<Vec<WordCountFile>>>, count: WordCount) {
+    let guard = files.clone();
+
+
     let word_count_upgraded_weak_handle = count.as_weak();
 
-    let guard = files.clone();
     let array = word_count_upgraded_weak_handle
         .unwrap()
         .get_list_of_structs();
