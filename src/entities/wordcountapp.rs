@@ -40,6 +40,7 @@ impl WordCountApp {
                 }
             });
 
+        // RECALCULATE BUTTON
         let mut files_bind_re_calc = files.clone();
         word_count_window.on_re_calc_pressed(move || {
             let guard = files_bind_re_calc.clone();
@@ -52,6 +53,7 @@ impl WordCountApp {
             }
         });
 
+        // CLEAR BUTTON
         let word_count_window_weak_handle = word_count_window.as_weak();
         let files_bind_clear = files.clone();
         word_count_window.on_clear_pressed(move || {
@@ -74,8 +76,6 @@ impl WordCountApp {
             }
         });
     }
-
-    pub fn load_file() {}
 }
 
 fn show_open_dialog() -> Option<PathBuf> {
@@ -83,8 +83,4 @@ fn show_open_dialog() -> Option<PathBuf> {
         .add_filter("docx", &["docx"])
         .show_open_single_file()
         .expect("could not open file dialog")
-}
-
-pub fn list_files(vec: Vec<WordCountFile>) {
-    println!("{:#?}", vec);
 }
