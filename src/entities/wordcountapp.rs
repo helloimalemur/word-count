@@ -1,17 +1,14 @@
 use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::ui::WordCount;
-use chrono::Local;
 use native_dialog::FileDialog;
-use slint::WindowSize::Logical;
 use slint::{
-    ComponentHandle, LogicalSize, Model, ModelRc, SharedString, Timer, TimerMode, Weak, Window,
-    WindowSize,
+    ComponentHandle, Model, SharedString
 };
-use std::fmt::format;
+
 use std::ops::DerefMut;
 use std::path::PathBuf;
-use std::sync::{Arc, Mutex, MutexGuard};
+use std::sync::{Arc, Mutex};
 
 pub struct WordCountApp {
     pub files: Arc<Mutex<Vec<WordCountFile>>>,
@@ -58,19 +55,13 @@ impl WordCountApp {
                 }
             });
 
-        let word_count_window_weak_handle_re_calc = word_count_window.as_weak();
         let mut files_bind_re_calc = files.clone();
         word_count_window.on_re_calc_pressed(move || {
             let guard = files_bind_re_calc.clone();
 
-            let word_count_upgraded_weak_handle =
-                word_count_window_weak_handle_re_calc.upgrade().unwrap();
-            let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-            let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
-
             println!("Vec size; {}", guard.lock().unwrap().len());
 
-            for (ind, file) in guard.lock().unwrap().iter_mut().enumerate() {
+            for (_ind, file) in guard.lock().unwrap().iter_mut().enumerate() {
                 println!("{}", file.full_file_contents);
                 file.being_modified = true;
             }
@@ -88,10 +79,6 @@ impl WordCountApp {
             println!("Vec size; {}", guard.lock().unwrap().len());
 
             guard.lock().unwrap().deref_mut().clear();
-
-            // for (ind,file) in guard.lock().unwrap().iter().enumerate() {
-            //     println!("{}", file.full_file_contents);
-            // }
 
             for i in 0..10 {
                 array.clone().set_row_data(i, (SharedString::from(""),));
