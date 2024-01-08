@@ -25,7 +25,7 @@ impl WordCountApp {
     }
 
     pub fn config(&mut self, word_count_window: WordCount, files: Rc<Mutex<Vec<WordCountFile>>>) {
-        let mut files_bind_open = files.clone();
+        let files_bind_open = files.clone();
         word_count_window
             // OPEN FILE BUTTON
             .on_open_file_pressed(move || {
@@ -33,7 +33,7 @@ impl WordCountApp {
 
                 if let Some(file) = show_open_dialog() {
                     println!("{}", file.to_str().unwrap());
-                    let mut new_file = WordCountFile::new(String::from(file.to_str().unwrap()));
+                    let new_file = WordCountFile::new(String::from(file.to_str().unwrap()));
                     // Add WordCountFile to Vec
                     guard.push(new_file.clone());
                 }
@@ -59,8 +59,7 @@ impl WordCountApp {
             let guard = files_bind_clear.clone();
 
             let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
-            let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-            let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+            let array = word_count_upgraded_weak_handle.get_list_of_structs();
 
             println!("Vec size; {}", guard.lock().unwrap().len());
 
@@ -70,7 +69,7 @@ impl WordCountApp {
                 array.clone().set_row_data(i, (SharedString::from(""),));
                 word_count_upgraded_weak_handle.set_list_of_structs(array.clone());
                 // increment counter on gui
-                counter_value = guard.lock().unwrap().len() as i32;
+                let counter_value = guard.lock().unwrap().len() as i32;
                 word_count_upgraded_weak_handle.set_counter(counter_value);
             }
         });
