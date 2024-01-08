@@ -36,11 +36,11 @@ impl WordCountApp {
             // OPEN FILE BUTTON
             .on_open_file_pressed(move || {
                 let mut guard = files_bind_open.lock().unwrap();
-                let word_count_upgraded_weak_handle =
-                    word_count_window_weak_handle_open.upgrade().unwrap();
+                // let word_count_upgraded_weak_handle =
+                //     word_count_window_weak_handle_open.upgrade().unwrap();
 
                 // let mut counter_value = word_count_upgraded_weak_handle.get_counter();
-                let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
+                // let mut array = word_count_upgraded_weak_handle.get_list_of_structs();
 
                 if let Some(file) = show_open_dialog() {
                     println!("{}", file.to_str().unwrap());
@@ -62,17 +62,17 @@ impl WordCountApp {
                     // Add WordCountFile to Vec
                     guard.push(new_file.clone());
 
-                    let mut bind = guard.clone();
-                    for (ind, ent) in bind.iter_mut().enumerate() {
-                        let text = format!(
-                            "text: {} - WordCount: {}",
-                            ent.path.clone(),
-                            ent.word_count
-                        );
-                        array.set_row_data(ind, (SharedString::from(text),));
-                    }
-
-                    word_count_upgraded_weak_handle.set_list_of_structs(array);
+                    // let mut bind = guard.clone();
+                    // for (ind, ent) in bind.iter_mut().enumerate() {
+                    //     let text = format!(
+                    //         "text: {} - WordCount: {}",
+                    //         ent.path.clone(),
+                    //         ent.word_count
+                    //     );
+                    //     array.set_row_data(ind, (SharedString::from(text),));
+                    // }
+                    //
+                    // word_count_upgraded_weak_handle.set_list_of_structs(array);
 
                 }
             });

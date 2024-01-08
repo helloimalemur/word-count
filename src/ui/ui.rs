@@ -5,7 +5,7 @@ slint::slint! {
         title: "Word Count";
 
         height: 500px;
-        width: 600px;
+        width: 800px;
         in-out property <int> counter: 0;
         callback open-file-pressed <=> open-file.clicked;
         callback re-calc-pressed <=> re-calc.clicked;
@@ -16,10 +16,15 @@ slint::slint! {
         VerticalLayout {
             HorizontalBox {
                 height: 100px;
-                width: 600px;
+                width: 800px;
                 Rectangle {
                     open-file := Button {
                         text: "Open File (files open:" + root.counter +")";
+                    }
+                }
+                Rectangle {
+                    open-folder := Button {
+                        text: "Open Folder (files open:" + root.counter +")";
                     }
                 }
                 Rectangle {
@@ -34,7 +39,7 @@ slint::slint! {
                 }
             }
             HorizontalBox {
-                width: 600px;
+                width: 800px;
                 height: 400px;
                 Rectangle {
                     VerticalLayout {
