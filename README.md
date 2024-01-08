@@ -6,6 +6,16 @@
     For keeping track of the word-count in multiple .docx files at the same time.
     While also providing additional information.
 
+### Current calculations provided
+    word count
+    unique words
+
+### Planned calculations
+    average sentance count per paragraph
+    average character count per paragraph
+    top three sentance starter words
+
+
 ## Development and Collaboration
 #### Feel free to open a pull request, please run the following prior to your submission please!
     echo "Run clippy"; cargo clippy -- -D clippy::all
