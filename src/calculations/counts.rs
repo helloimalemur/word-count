@@ -40,17 +40,6 @@ pub fn get_top_used_word(input: String) -> String {
     nth_string.to_string()
 }
 
-pub fn get_m_dash_count(input: String) -> usize {
-    let mut out: usize = 0;
-    // println!("{}", input.find("\u{2014}").unwrap());
-    // let x = input.find("\u{2014}");
-    // if x.is_some() {
-    //     out = x.unwrap() / 214;
-    // }
-    out
-    // 0
-}
-
 pub fn get_unique_words(input: String) -> usize {
     let binding = input.to_lowercase();
     let result = words_count::count_separately(binding.as_str());

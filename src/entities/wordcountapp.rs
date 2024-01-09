@@ -2,9 +2,6 @@ use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::slint_ui::WordCount;
 use native_dialog::FileDialog;
 use slint::{ComponentHandle, Model, SharedString};
-
-use slint::platform::update_timers_and_animations;
-use std::ops::DerefMut;
 use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::Mutex;
@@ -32,11 +29,9 @@ impl WordCountApp {
                 println!("{}", a);
 
                 for (ind, file) in bind.iter().enumerate() {
-                    if file.path.contains(a.as_str()) && !a.is_empty() {
-                        if files_bind_close.lock().unwrap().len() > ind {
-                            let _ = files_bind_close.lock().unwrap().remove(ind);
-                            word_window_closer.invoke_clear_pressed();
-                        }
+                    if file.path.contains(a.as_str()) && !a.is_empty() && files_bind_close.lock().unwrap().len() > ind {
+                        let _ = files_bind_close.lock().unwrap().remove(ind);
+                        word_window_closer.invoke_clear_pressed();
                         // update_timers_and_animations();
                     }
                 }

@@ -44,12 +44,13 @@ pub fn run_timer(
 
         let one_most_used =
             calculations::counts::get_top_used_word(ent.full_file_contents.to_string().clone());
-        let two_most_used =
+        let _two_most_used =
             calculations::counts::get_top_used_word(ent.full_file_contents.to_string().clone());
-        let third_most_used =
+        let _third_most_used =
             calculations::counts::get_top_used_word(ent.full_file_contents.to_string().clone());
 
         let mut partial_path = String::new();
+        print!("{}", partial_path);
         if path.len() > 30 {
             let path_bytes = &path.as_bytes()[0..30];
             partial_path =
