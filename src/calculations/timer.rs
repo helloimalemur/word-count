@@ -36,23 +36,32 @@ pub fn run_timer(
         let word_count = calculations::counts::get_word_count(ent.full_file_contents.to_string());
         let unique_word_count =
             calculations::counts::get_unique_words(ent.full_file_contents.to_string());
-        let one_most_used = calculations::counts::get_nth_top_used_word(
+        let (one_most_used, one_most_used_occurances) = calculations::counts::get_nth_top_used_word(
             ent.full_file_contents.to_string().clone(),
             1,
         );
-        let two_most_used = calculations::counts::get_nth_top_used_word(
+        let (two_most_used, two_most_used_occurances) = calculations::counts::get_nth_top_used_word(
             ent.full_file_contents.to_string().clone(),
             2,
         );
-        let third_most_used = calculations::counts::get_nth_top_used_word(
-            ent.full_file_contents.to_string().clone(),
-            3,
-        );
+        let (third_most_used, third_most_used_occurances) =
+            calculations::counts::get_nth_top_used_word(
+                ent.full_file_contents.to_string().clone(),
+                3,
+            );
 
         // create gui text output
         let text = format!(
-            "{} - Most Used; #1: {}, #2: {}, #3: {}, Unique_words: {}, WordCount: {}",
-            path, one_most_used, two_most_used, third_most_used, unique_word_count, word_count,
+            "{} - Most Used; #1: [{}:{}], #2: [{}:{}], #3: [{}:{}], Unique_words: {}, WordCount: {}",
+            path,
+            one_most_used,
+            one_most_used_occurances,
+            two_most_used,
+            two_most_used_occurances,
+            third_most_used,
+            third_most_used_occurances,
+            unique_word_count,
+            word_count,
         );
 
         // update gui row data
