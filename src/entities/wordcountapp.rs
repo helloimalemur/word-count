@@ -6,7 +6,7 @@ use slint::{ComponentHandle, Model, SharedString};
 use std::ops::DerefMut;
 use std::path::PathBuf;
 use std::rc::Rc;
-use std::sync::{Mutex};
+use std::sync::Mutex;
 
 pub struct WordCountApp {
     pub files: Rc<Mutex<Vec<WordCountFile>>>,
@@ -14,10 +14,7 @@ pub struct WordCountApp {
 }
 
 impl WordCountApp {
-    pub fn new(
-        word_count_window: WordCount,
-        files: Rc<Mutex<Vec<WordCountFile>>>,
-    ) -> WordCountApp {
+    pub fn new(word_count_window: WordCount, files: Rc<Mutex<Vec<WordCountFile>>>) -> WordCountApp {
         WordCountApp {
             files,
             word_count_window: Rc::new(Mutex::new(word_count_window.clone_strong())),
@@ -66,7 +63,16 @@ impl WordCountApp {
             guard.lock().unwrap().deref_mut().clear();
 
             for i in 0..10 {
-                array.clone().set_row_data(i, (SharedString::from(""),SharedString::from(""),SharedString::from(""),SharedString::from(""),SharedString::from("")));
+                array.clone().set_row_data(
+                    i,
+                    (
+                        SharedString::from(""),
+                        SharedString::from(""),
+                        SharedString::from(""),
+                        SharedString::from(""),
+                        SharedString::from(""),
+                    ),
+                );
                 word_count_upgraded_weak_handle.set_list_of_structs(array.clone());
                 // increment counter on gui
                 let counter_value = guard.lock().unwrap().len() as i32;

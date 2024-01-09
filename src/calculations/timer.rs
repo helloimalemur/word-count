@@ -1,11 +1,11 @@
-use std::rc::Rc;
 use crate::calculations;
 use crate::docx::loader::read_docx_contents_to_string;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::slint_ui::WordCount;
-use slint::{Model, SharedString, Weak};
-use std::sync::{Mutex};
 use os_info::Type;
+use slint::{Model, SharedString, Weak};
+use std::rc::Rc;
+use std::sync::Mutex;
 
 pub fn run_timer(
     files_bind_open: Rc<Mutex<Vec<WordCountFile>>>,
@@ -28,29 +28,43 @@ pub fn run_timer(
         let info = os_info::get();
         let path: String = match info.os_type() {
             Type::Windows => ent.path.split('\\').last().unwrap(),
-            _ => ent.path.split('/').last().unwrap()
-        }.to_string();
+            _ => ent.path.split('/').last().unwrap(),
+        }
+        .to_string();
 
         // get calculcations
         let word_count = calculations::counts::get_word_count(ent.full_file_contents.to_string());
-        let unique_word_count = calculations::counts::get_unique_words(ent.full_file_contents.to_string());
-        let one_most_used = calculations::counts::get_nth_top_used_word(ent.full_file_contents.to_string().clone(), 1);
-        let two_most_used = calculations::counts::get_nth_top_used_word(ent.full_file_contents.to_string().clone(), 2);
-        let third_most_used = calculations::counts::get_nth_top_used_word(ent.full_file_contents.to_string().clone(), 3);
-
+        let unique_word_count =
+            calculations::counts::get_unique_words(ent.full_file_contents.to_string());
+        let one_most_used = calculations::counts::get_nth_top_used_word(
+            ent.full_file_contents.to_string().clone(),
+            1,
+        );
+        let two_most_used = calculations::counts::get_nth_top_used_word(
+            ent.full_file_contents.to_string().clone(),
+            2,
+        );
+        let third_most_used = calculations::counts::get_nth_top_used_word(
+            ent.full_file_contents.to_string().clone(),
+            3,
+        );
 
         // create gui text output
         let text = format!(
             "{} - Most Used; #1: {}, #2: {}, #3: {}, Unique_words: {}, WordCount: {}",
-            path,
-            one_most_used,
-            two_most_used,
-            third_most_used,
-            unique_word_count,
-            word_count,
+            path, one_most_used, two_most_used, third_most_used, unique_word_count, word_count,
         );
 
         // update gui row data
-        array.set_row_data(ind, (SharedString::from(text),SharedString::from(""),SharedString::from(""),SharedString::from(""),SharedString::from("")));
+        array.set_row_data(
+            ind,
+            (
+                SharedString::from(text),
+                SharedString::from(""),
+                SharedString::from(""),
+                SharedString::from(""),
+                SharedString::from(""),
+            ),
+        );
     }
 }

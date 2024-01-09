@@ -1,9 +1,9 @@
-use std::rc::Rc;
 use crate::entities::wordcountapp::WordCountApp;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::slint_ui::WordCount;
 use slint::{ComponentHandle, Timer, TimerMode};
-use std::sync::{Mutex};
+use std::rc::Rc;
+use std::sync::Mutex;
 
 mod calculations;
 mod docx;
@@ -13,8 +13,7 @@ mod ui;
 fn main() {
     let word_count_window = WordCount::new().unwrap();
 
-    let files: Rc<Mutex<Vec<WordCountFile>>> =
-        Rc::new(Mutex::new(Vec::<WordCountFile>::new()));
+    let files: Rc<Mutex<Vec<WordCountFile>>> = Rc::new(Mutex::new(Vec::<WordCountFile>::new()));
 
     let app = Rc::new(Mutex::new(WordCountApp::new(
         word_count_window.clone_strong(),
