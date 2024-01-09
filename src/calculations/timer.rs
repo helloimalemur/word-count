@@ -33,9 +33,14 @@ pub fn run_timer(
         .to_string();
 
         // get calculcations
+        let white_space = calculations::counts::get_ws_count(ent.full_file_contents.to_string());
+        let cjk = calculations::counts::get_cjk_count(ent.full_file_contents.to_string());
         let word_count = calculations::counts::get_word_count(ent.full_file_contents.to_string());
         let unique_word_count =
             calculations::counts::get_unique_words(ent.full_file_contents.to_string());
+        let char_count = calculations::counts::get_char_count(ent.full_file_contents.to_string());
+        let char_count_no_ws = char_count - white_space;
+
         let (one_most_used, one_most_used_occurances) = calculations::counts::get_nth_top_used_word(
             ent.full_file_contents.to_string().clone(),
             1,
@@ -52,14 +57,12 @@ pub fn run_timer(
 
         // create gui text output
         let text = format!(
-            "{} - Most Used; #1: [{}:{}], #2: [{}:{}], #3: [{}:{}], Unique_words: {}, WordCount: {}",
+            "{} - Most Used; #1: [{}:{}], CJK count: {}, Char count: {}, Unique_words: {}, WordCount: {}",
             path,
             one_most_used,
             one_most_used_occurances,
-            two_most_used,
-            two_most_used_occurances,
-            third_most_used,
-            third_most_used_occurances,
+            cjk,
+            char_count,
             unique_word_count,
             word_count,
         );

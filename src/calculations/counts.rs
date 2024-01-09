@@ -2,6 +2,18 @@ pub fn get_word_count(input: String) -> i64 {
     words_count::count(input).words as i64
 }
 
+pub fn get_char_count(input: String) -> i64 {
+    words_count::count(input.replace('\n', "").replace('\r', "")).characters as i64
+}
+
+pub fn get_cjk_count(input: String) -> i64 {
+    words_count::count(input).cjk as i64
+}
+
+pub fn get_ws_count(input: String) -> i64 {
+    words_count::count(input).whitespaces as i64
+}
+
 // pub fn get_para_count(_path: String) {
 //     todo!()
 // }
