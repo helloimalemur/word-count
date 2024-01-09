@@ -10,6 +10,7 @@ slint::slint! {
         callback open-file-pressed <=> open-file.clicked;
         callback re-calc-pressed <=> re-calc.clicked;
         callback clear-pressed <=> clear.clicked;
+        callback closer-clicked(string);
 
         in-out property<[{text: string, text2: string, text3: string, text4: string, text5: string}]> list-of-structs: [{text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, ];
 
@@ -38,13 +39,18 @@ slint::slint! {
                     }
                 }
             }
-            HorizontalBox {
+            box1 := HorizontalBox {
                 width: 1000px;
                 height: 400px;
-                Rectangle {
-                    VerticalLayout {
+                rect1 := Rectangle {
+                    layo1 := VerticalLayout {
                         for data in root.list-of-structs: my-repeated-text := HorizontalBox {
-                            Text {text: data.text;}
+                            title := Button {
+                                text: data.text;
+                                clicked => {
+                                    root.closer-clicked(data.text)
+                                }
+                            }
                             Text {text: data.text2;}
                             Text {text: data.text3;}
                             Text {text: data.text4;}

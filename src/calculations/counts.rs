@@ -25,10 +25,17 @@ pub fn get_ws_count(input: String) -> i64 {
 
 pub fn get_top_used_word(input: String) -> String {
     let binding = input.to_lowercase();
-    let (nth_string, nth_size) = words_count::count_separately(binding.as_str())
+
+    let mut nth_string = String::new();
+    let mut nth_size = 0usize;
+    let top= words_count::count_separately(binding.as_str())
         .into_iter()
-        .max_by_key(|entry | entry.1)
-        .unwrap();
+        .max_by_key(|entry | entry.1);
+    if top.is_some() {
+        let (top_string, mut nth_size) = top.expect("parse top used word");
+        nth_string = top_string.to_string();
+        nth_size = nth_size;
+    }
 
     nth_string.to_string()
 }
