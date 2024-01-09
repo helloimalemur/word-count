@@ -11,9 +11,11 @@
 #### For the time-being, to Run this and try it out you will need to install Rust
     https://www.rust-lang.org/tools/install
 #### Then [download+unzip](https://codeload.github.com/helloimalemur/word-count/zip/refs/heads/master) OR Clone the repo
+#### Run the following in a command prompt.
     git clone https://github.com/helloimalemur/word-count.git;
     cd word-count/;
     cargo run;           # build and run
+### If on Windows, use "Powershell" via Shift+Right-Click -> Open Command Prompt / Powershell Window Here
 
 #
 
