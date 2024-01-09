@@ -19,12 +19,12 @@ slint::slint! {
                 width: 1000px;
                 Rectangle {
                     open-file := Button {
-                        text: "Open File (files open:" + root.counter +")";
+                        text: "Open File";
                     }
                 }
                 Rectangle {
                     open-folder := Button {
-                        text: "Open Folder (files open:" + root.counter +")";
+                        text: "Open Folder";
                     }
                 }
                 Rectangle {
