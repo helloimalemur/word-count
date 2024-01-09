@@ -7,7 +7,7 @@ pub fn get_char_count(input: String) -> i64 {
 }
 
 pub fn get_cjk_count(input: String) -> i64 {
-    words_count::count(input).cjk as i64
+    input.split("\n\n").count() as i64
 }
 
 pub fn get_ws_count(input: String) -> i64 {
