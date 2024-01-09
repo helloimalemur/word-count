@@ -44,7 +44,7 @@ slint::slint! {
                 Rectangle {
                     VerticalLayout {
                         for data in root.list-of-structs: my-repeated-text := HorizontalBox {
-                            Text { text: data.text;}
+                            Text {text: data.text;}
                             Text {text: data.text2;}
                             Text {text: data.text3;}
                             Text {text: data.text4;}

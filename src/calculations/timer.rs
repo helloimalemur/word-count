@@ -39,7 +39,7 @@ pub fn run_timer(
         let unique_word_count =
             calculations::counts::get_unique_words(ent.full_file_contents.to_string());
         let char_count = calculations::counts::get_char_count(ent.full_file_contents.to_string());
-        let char_count_no_ws = char_count - white_space;
+        let _char_count_no_ws = char_count - white_space;
 
         let one_most_used = calculations::counts::get_top_used_word(
             ent.full_file_contents.to_string().clone()
@@ -52,26 +52,56 @@ pub fn run_timer(
                 ent.full_file_contents.to_string().clone()
             );
 
+        let mut partial_path = String::new();
+        if path.len() > 30 {
+            let path_bytes = &path.as_bytes()[0..30];
+            partial_path = String::from_utf8(Vec::from(path_bytes)).expect("could not substring filename")
+        } else {
+            partial_path = path;
+        }
+
         // create gui text output
         let text = format!(
-            "{} - Most Used; #1: [{}], Para count: {}, Char count: {}, Unique_words: {}, WordCount: {}",
-            path,
+            "{}",
+            partial_path,
+        );
+
+        let text2 = format!(
+            "Most Used; #1: [{}]\n Para count: {}\n Char count: {}",
             one_most_used,
             paragraph_count,
             char_count,
+        );
+
+        let text3 = format!(
+            "{}",
+            " "
+        );
+
+        let text4 = format!(
+            "{}",
+            " "
+        );
+
+        let text5 = format!(
+            "Unique_words: {}\n WordCount: {}",
             unique_word_count,
             word_count,
         );
+
+
+
+
 
         // update gui row data
         array.set_row_data(
             ind,
             (
                 SharedString::from(text),
-                SharedString::from(""),
-                SharedString::from(""),
-                SharedString::from(""),
-                SharedString::from(""),
+                SharedString::from(text2),
+                SharedString::from(text3),
+                SharedString::from(text4),
+                SharedString::from(text5),
             ),
         );
     }
