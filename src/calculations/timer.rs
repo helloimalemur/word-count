@@ -34,14 +34,20 @@ pub fn run_timer(
         // get calculcations
         let word_count = calculations::counts::get_word_count(ent.full_file_contents.to_string());
         let unique_word_count = calculations::counts::get_unique_words(ent.full_file_contents.to_string());
+        let one_most_used = calculations::counts::get_nth_top_used_word(ent.full_file_contents.to_string().clone(), 1);
+        let two_most_used = calculations::counts::get_nth_top_used_word(ent.full_file_contents.to_string().clone(), 2);
+        let third_most_used = calculations::counts::get_nth_top_used_word(ent.full_file_contents.to_string().clone(), 3);
 
 
         // create gui text output
         let text = format!(
-            "{} - WordCount: {}, Unique_words: {}",
+            "{} - Most Used; #1: {}, #2: {}, #3: {}, Unique_words: {}, WordCount: {}",
             path,
+            one_most_used,
+            two_most_used,
+            third_most_used,
+            unique_word_count,
             word_count,
-            unique_word_count
         );
 
         // update gui row data
