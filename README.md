@@ -47,3 +47,15 @@
     Linux dependencies
     
     The Linux implementation of native-dialog requires either Zenity or Kdialog to be installed. Otherwise you'll get a No Implementation error.
+
+
+    ┌───────────────────────────────────────────────────────────────────────────────────────┐
+    | Language                        files        size       blank     comment        code |
+    ├───────────────────────────────────────────────────────────────────────────────────────┤
+    | Markdown                            1     1.96 KB          13           0          36 |
+    | Rust                               11    14.21 KB          57          29         352 |
+    | Toml                                1    335.00 B           2           1          13 |
+    | XML                                 5    23.61 KB           0           0         568 |
+    ├───────────────────────────────────────────────────────────────────────────────────────┤
+    | Sum                                18    40.10 KB          72          30         969 |
+    └───────────────────────────────────────────────────────────────────────────────────────┘
