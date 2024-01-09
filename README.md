@@ -6,6 +6,9 @@
     For keeping track of the word-count in multiple .docx files at the same time.
     While also providing additional information.
 
+##### Notes
+    does NOT consider em-dash as a word
+
 ### Current calculations provided
     word count
     unique words
