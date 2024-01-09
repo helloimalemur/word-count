@@ -22,6 +22,7 @@ pub fn run_timer(
     // for each file in the Vec
     for (ind, ent) in bind.iter_mut().enumerate() {
         // reload file contents
+        // todo()! prevent opening files already open
         ent.full_file_contents = read_docx_contents_to_string(ent.path.to_string());
 
         // get file name only
