@@ -22,13 +22,14 @@ pub fn get_ws_count(input: String) -> i64 {
 //     todo!()
 // }
 
-pub fn get_nth_top_used_word(input: String, nth: usize) -> (String, usize) {
+pub fn get_top_used_word(input: String) -> String {
     let binding = input.to_lowercase();
-    let (nth_string, nth_count) = words_count::count_separately(binding.as_str())
+    let (nth_string, nth_size) = words_count::count_separately(binding.as_str())
         .into_iter()
-        .nth(nth)
+        .max_by_key(|entry | entry.1)
         .unwrap();
-    (nth_string.to_string(), nth_count)
+
+    nth_string.to_string()
 }
 
 pub fn get_unique_words(input: String) -> usize {

@@ -34,34 +34,30 @@ pub fn run_timer(
 
         // get calculcations
         let white_space = calculations::counts::get_ws_count(ent.full_file_contents.to_string());
-        let cjk = calculations::counts::get_cjk_count(ent.full_file_contents.to_string());
+        let paragraph_count = calculations::counts::get_paragraph_count(ent.full_file_contents.to_string());
         let word_count = calculations::counts::get_word_count(ent.full_file_contents.to_string());
         let unique_word_count =
             calculations::counts::get_unique_words(ent.full_file_contents.to_string());
         let char_count = calculations::counts::get_char_count(ent.full_file_contents.to_string());
         let char_count_no_ws = char_count - white_space;
 
-        let (one_most_used, one_most_used_occurances) = calculations::counts::get_nth_top_used_word(
-            ent.full_file_contents.to_string().clone(),
-            1,
+        let one_most_used = calculations::counts::get_top_used_word(
+            ent.full_file_contents.to_string().clone()
         );
-        let (two_most_used, two_most_used_occurances) = calculations::counts::get_nth_top_used_word(
-            ent.full_file_contents.to_string().clone(),
-            2,
+        let two_most_used = calculations::counts::get_top_used_word(
+            ent.full_file_contents.to_string().clone()
         );
-        let (third_most_used, third_most_used_occurances) =
-            calculations::counts::get_nth_top_used_word(
-                ent.full_file_contents.to_string().clone(),
-                3,
+        let third_most_used =
+            calculations::counts::get_top_used_word(
+                ent.full_file_contents.to_string().clone()
             );
 
         // create gui text output
         let text = format!(
-            "{} - Most Used; #1: [{}:{}], CJK count: {}, Char count: {}, Unique_words: {}, WordCount: {}",
+            "{} - Most Used; #1: [{}], Para count: {}, Char count: {}, Unique_words: {}, WordCount: {}",
             path,
             one_most_used,
-            one_most_used_occurances,
-            cjk,
+            paragraph_count,
             char_count,
             unique_word_count,
             word_count,
