@@ -7,7 +7,7 @@
     While also providing additional information.
 
 ##### Notes
-    does NOT consider em-dash as a word
+    Removes unicode em-dashes (u+2014) prior to calculating word count, so "back—then" would correctly calculate as two words.
 
 ### Current calculations provided
     word count
