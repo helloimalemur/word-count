@@ -22,6 +22,22 @@ impl WordCountApp {
     }
 
     pub fn config(&mut self, word_count_window: WordCount, files: Rc<Mutex<Vec<WordCountFile>>>) {
+        let files_bind_close = files.clone();
+        word_count_window
+            // OPEN FILE BUTTON
+            .on_closer_clicked(move |a| {
+                let mut guard = files_bind_close.lock().unwrap();
+
+                println!("{}", a);
+
+                for (ind,file) in guard.iter().enumerate() {
+                    if file.path.contains(a.as_str()) {
+                        guard.clone().remove(ind);
+                    }
+                }
+            });
+
+
         let files_bind_open = files.clone();
         word_count_window
             // OPEN FILE BUTTON
