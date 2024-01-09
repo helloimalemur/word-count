@@ -45,6 +45,6 @@ pub fn run_timer(
         );
 
         // update gui row data
-        array.set_row_data(ind, (SharedString::from(text),));
+        array.set_row_data(ind, (SharedString::from(text),SharedString::from(""),SharedString::from(""),SharedString::from(""),SharedString::from("")));
     }
 }

@@ -66,7 +66,7 @@ impl WordCountApp {
             guard.lock().unwrap().deref_mut().clear();
 
             for i in 0..10 {
-                array.clone().set_row_data(i, (SharedString::from(""),));
+                array.clone().set_row_data(i, (SharedString::from(""),SharedString::from(""),SharedString::from(""),SharedString::from(""),SharedString::from("")));
                 word_count_upgraded_weak_handle.set_list_of_structs(array.clone());
                 // increment counter on gui
                 let counter_value = guard.lock().unwrap().len() as i32;

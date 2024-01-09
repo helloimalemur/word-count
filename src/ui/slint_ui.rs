@@ -11,7 +11,7 @@ slint::slint! {
         callback re-calc-pressed <=> re-calc.clicked;
         callback clear-pressed <=> clear.clicked;
 
-        in-out property<[{text: string}]> list-of-structs: [{text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, {text: ""}, ];
+        in-out property<[{text: string, text2: string, text3: string, text4: string, text5: string}]> list-of-structs: [{text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, {text: "", text2: "", text3: "", text4: "", text5: ""}, ];
 
         VerticalLayout {
             HorizontalBox {
@@ -43,8 +43,12 @@ slint::slint! {
                 height: 400px;
                 Rectangle {
                     VerticalLayout {
-                        for data in root.list-of-structs: my-repeated-text := Text {
-                            text: data.text;
+                        for data in root.list-of-structs: my-repeated-text := HorizontalBox {
+                            Text { text: data.text;}
+                            Text {text: data.text2;}
+                            Text {text: data.text3;}
+                            Text {text: data.text4;}
+                            Text {text: data.text5;}
                         }
                     }
                 }
