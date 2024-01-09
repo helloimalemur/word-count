@@ -1,5 +1,5 @@
 pub fn get_word_count(input: String) -> i64 {
-    words_count::count(input).words as i64
+    words_count::count(input.to_lowercase()).words as i64
 }
 
 pub fn get_char_count(input: String) -> i64 {
