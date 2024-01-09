@@ -32,11 +32,11 @@ impl WordCountApp {
                 println!("{}", a);
 
                 for (ind,file) in bind.iter().enumerate() {
-                    println!("{}", file.path);
                     if file.path.contains(a.as_str()) {
-                        println!("{}", true);
-                        files_bind_close.lock().unwrap().remove(ind);
-                        word_window_closer.invoke_clear_pressed();
+                        if files_bind_close.lock().unwrap().len() > ind  {
+                            let _ = files_bind_close.lock().unwrap().remove(ind);
+                            word_window_closer.invoke_clear_pressed();
+                        }
                         // update_timers_and_animations();
                     }
                 }
