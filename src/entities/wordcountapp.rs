@@ -3,11 +3,11 @@ use crate::ui::slint_ui::WordCount;
 use native_dialog::FileDialog;
 use slint::{ComponentHandle, Model, SharedString};
 
+use slint::platform::update_timers_and_animations;
 use std::ops::DerefMut;
 use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::Mutex;
-use slint::platform::update_timers_and_animations;
 
 pub struct WordCountApp {
     pub files: Rc<Mutex<Vec<WordCountFile>>>,
@@ -31,9 +31,9 @@ impl WordCountApp {
                 let bind = files_bind_close.lock().unwrap().clone();
                 println!("{}", a);
 
-                for (ind,file) in bind.iter().enumerate() {
-                    if file.path.contains(a.as_str()) && a.len() > 0 {
-                        if files_bind_close.lock().unwrap().len() > ind  {
+                for (ind, file) in bind.iter().enumerate() {
+                    if file.path.contains(a.as_str()) && !a.is_empty() {
+                        if files_bind_close.lock().unwrap().len() > ind {
                             let _ = files_bind_close.lock().unwrap().remove(ind);
                             word_window_closer.invoke_clear_pressed();
                         }
@@ -41,7 +41,6 @@ impl WordCountApp {
                     }
                 }
             });
-
 
         let files_bind_open = files.clone();
         word_count_window

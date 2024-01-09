@@ -34,64 +34,46 @@ pub fn run_timer(
 
         // get calculcations
         let white_space = calculations::counts::get_ws_count(ent.full_file_contents.to_string());
-        let paragraph_count = calculations::counts::get_paragraph_count(ent.full_file_contents.to_string());
+        let paragraph_count =
+            calculations::counts::get_paragraph_count(ent.full_file_contents.to_string());
         let word_count = calculations::counts::get_word_count(ent.full_file_contents.to_string());
         let unique_word_count =
             calculations::counts::get_unique_words(ent.full_file_contents.to_string());
         let char_count = calculations::counts::get_char_count(ent.full_file_contents.to_string());
         let _char_count_no_ws = char_count - white_space;
 
-        let one_most_used = calculations::counts::get_top_used_word(
-            ent.full_file_contents.to_string().clone()
-        );
-        let two_most_used = calculations::counts::get_top_used_word(
-            ent.full_file_contents.to_string().clone()
-        );
+        let one_most_used =
+            calculations::counts::get_top_used_word(ent.full_file_contents.to_string().clone());
+        let two_most_used =
+            calculations::counts::get_top_used_word(ent.full_file_contents.to_string().clone());
         let third_most_used =
-            calculations::counts::get_top_used_word(
-                ent.full_file_contents.to_string().clone()
-            );
+            calculations::counts::get_top_used_word(ent.full_file_contents.to_string().clone());
 
         let mut partial_path = String::new();
         if path.len() > 30 {
             let path_bytes = &path.as_bytes()[0..30];
-            partial_path = String::from_utf8(Vec::from(path_bytes)).expect("could not substring filename")
+            partial_path =
+                String::from_utf8(Vec::from(path_bytes)).expect("could not substring filename")
         } else {
             partial_path = path;
         }
 
         // create gui text output
-        let text = format!(
-            "{}",
-            partial_path,
-        );
+        let text = format!("{}", partial_path,);
 
         let text2 = format!(
             "Most Used; #1: [{}]\n Para count: {}\n Char count: {}",
-            one_most_used,
-            paragraph_count,
-            char_count,
+            one_most_used, paragraph_count, char_count,
         );
 
-        let text3 = format!(
-            "{}",
-            " "
-        );
+        let text3 = format!("{}", " ");
 
-        let text4 = format!(
-            "{}",
-            " "
-        );
+        let text4 = format!("{}", " ");
 
         let text5 = format!(
             "Unique_words: {}\n WordCount: {}",
-            unique_word_count,
-            word_count,
+            unique_word_count, word_count,
         );
-
-
-
-
 
         // update gui row data
         array.set_row_data(
