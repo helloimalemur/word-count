@@ -7,6 +7,7 @@ use std::ops::DerefMut;
 use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::Mutex;
+use slint::platform::update_timers_and_animations;
 
 pub struct WordCountApp {
     pub files: Rc<Mutex<Vec<WordCountFile>>>,
@@ -23,16 +24,20 @@ impl WordCountApp {
 
     pub fn config(&mut self, word_count_window: WordCount, files: Rc<Mutex<Vec<WordCountFile>>>) {
         let files_bind_close = files.clone();
+        let word_window_closer = word_count_window.clone_strong();
         word_count_window
-            // OPEN FILE BUTTON
+            // CLOSE FILE BUTTON
             .on_closer_clicked(move |a| {
-                let mut guard = files_bind_close.lock().unwrap();
-
+                let bind = files_bind_close.lock().unwrap().clone();
                 println!("{}", a);
 
-                for (ind,file) in guard.iter().enumerate() {
+                for (ind,file) in bind.iter().enumerate() {
+                    println!("{}", file.path);
                     if file.path.contains(a.as_str()) {
-                        guard.clone().remove(ind);
+                        println!("{}", true);
+                        files_bind_close.lock().unwrap().remove(ind);
+                        word_window_closer.invoke_clear_pressed();
+                        // update_timers_and_animations();
                     }
                 }
             });
@@ -76,8 +81,6 @@ impl WordCountApp {
 
             println!("Vec size; {}", guard.lock().unwrap().len());
 
-            guard.lock().unwrap().deref_mut().clear();
-
             for i in 0..10 {
                 array.clone().set_row_data(
                     i,
@@ -89,7 +92,7 @@ impl WordCountApp {
                         SharedString::from(""),
                     ),
                 );
-                word_count_upgraded_weak_handle.set_list_of_structs(array.clone());
+                // word_count_upgraded_weak_handle.set_list_of_structs(array.clone());
                 // increment counter on gui
                 let counter_value = guard.lock().unwrap().len() as i32;
                 word_count_upgraded_weak_handle.set_counter(counter_value);
