@@ -2,9 +2,20 @@
 
 ## This is a work in progress!
 
-### A writer's Word count application.
+## A writer's Word count application.
+#### Supports Windows, MacOS, and Linux
     For keeping track of the word-count in multiple .docx files at the same time.
     While also providing additional information.
+
+## Running
+#### For the time-being, to Run this and try it out you will need to install Rust
+    https://www.rust-lang.org/tools/install
+#### Then [download+unzip](https://codeload.github.com/helloimalemur/word-count/zip/refs/heads/master) OR Clone the repo
+    git clone https://github.com/helloimalemur/word-count.git;
+    cd word-count/;
+    cargo run;           # build and run
+
+#
 
 ##### Notes
     Removes unicode em-dashes (u+2014) prior to calculating word count, so "back—then" would correctly calculate as two words.
