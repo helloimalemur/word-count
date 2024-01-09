@@ -32,7 +32,7 @@ impl WordCountApp {
                 println!("{}", a);
 
                 for (ind,file) in bind.iter().enumerate() {
-                    if file.path.contains(a.as_str()) {
+                    if file.path.contains(a.as_str()) && a.len() > 0 {
                         if files_bind_close.lock().unwrap().len() > ind  {
                             let _ = files_bind_close.lock().unwrap().remove(ind);
                             word_window_closer.invoke_clear_pressed();
