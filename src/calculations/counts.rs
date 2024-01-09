@@ -1,5 +1,6 @@
 pub fn get_word_count(input: String) -> usize {
-    words_count::count(input.to_lowercase()).words + get_m_dash_count(input.to_lowercase())
+    let remove_em_dashes = input.replace("\u{2014}", " ").to_lowercase();
+    words_count::count(remove_em_dashes.to_lowercase()).words
 }
 
 pub fn get_char_count(input: String) -> i64 {
