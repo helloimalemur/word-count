@@ -62,11 +62,14 @@ jobs:
           cargo: Cargo.toml
           dry_run: false
 
-      - uses: AButler/upload-release-assets@v3.0
-        name: upload assets
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          files: "target/wix/*.msi"
-          repo-token: ${{ secrets.GH_TOKEN }}
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: target/wix/*.msi
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
 
   build:
 
