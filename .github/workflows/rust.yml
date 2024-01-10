@@ -65,7 +65,7 @@ jobs:
       - uses: AButler/upload-release-assets@v3.0
         name: upload assets
         with:
-          files: "target\wix\*.msi"
+          files: "target/wix/*.msi"
           repo-token: ${{ secrets.GH_TOKEN }}
 
   build:
