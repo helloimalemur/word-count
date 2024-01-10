@@ -31,17 +31,17 @@ impl WordCountApp {
                 println!("{}", a);
 
                 for (ind, file) in bind.iter().enumerate() {
+                    // find the file's position in the Vec by it's filename
                     if file.path.contains(a.as_str())
                         && !a.is_empty()
                         && files_bind_close.lock().unwrap().len() > ind
                     {
+                        // remove file from Vec via it's position
                         let _ = files_bind_close.lock().unwrap().remove(ind);
-                        // word_window_closer.invoke_clear_pressed();
 
+                        // clear GUI and allow Timer to re-draw on next update
                         let word_count_upgraded_weak_handle = word_count_window_weak_handle.upgrade().unwrap();
                         let array = word_count_upgraded_weak_handle.get_list_of_structs();
-
-                        println!("Vec size; {}", guard.lock().unwrap().len());
 
                         for i in 0..10 {
                             array.clone().set_row_data(
@@ -54,10 +54,6 @@ impl WordCountApp {
                                     SharedString::from(""),
                                 ),
                             );
-                            // word_count_upgraded_weak_handle.set_list_of_structs(array.clone());
-                            // increment counter on gui
-                            let counter_value = guard.lock().unwrap().len() as i32;
-                            word_count_upgraded_weak_handle.set_counter(counter_value);
                         }
                     }
                 }
