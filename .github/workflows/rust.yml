@@ -42,7 +42,7 @@ jobs:
         run: cargo wix
 
       - name: lms
-        run: ls -althrs
+        run: ls
 
   build:
 
