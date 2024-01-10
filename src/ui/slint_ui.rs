@@ -23,11 +23,11 @@ slint::slint! {
                         text: "Open File";
                     }
                 }
-                Rectangle {
-                    open-folder := Button {
-                        text: "Open Folder";
-                    }
-                }
+                // Rectangle {
+                //     open-folder := Button {
+                //         text: "Open Folder";
+                //     }
+                // }
                 Rectangle {
                     re-calc := Button {
                         text: "Recalculate";
