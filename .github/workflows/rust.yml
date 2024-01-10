@@ -34,14 +34,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+
       - name: Clone
         run: ls -althrs
-
       - name: Rust Installer
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
         run: cargo wix
-
 
       - name: lms
         run: ls -althrs
