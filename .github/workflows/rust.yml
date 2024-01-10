@@ -38,6 +38,7 @@ jobs:
 
       - name: Clone
         run: ls -althrs
+
       - name: Rust Installer
         run: cargo wix
 
