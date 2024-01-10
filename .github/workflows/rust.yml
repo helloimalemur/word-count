@@ -26,7 +26,7 @@ jobs:
         repo: word-count
         token: ${{ secrets.GH_TOKEN }}
         cargo: Cargo.toml
-        dry_run: true
+        dry_run: false
 
 
 #    - name: Backup configs
