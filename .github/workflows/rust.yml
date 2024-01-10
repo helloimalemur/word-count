@@ -37,7 +37,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
 
       - name: Clone
-        run: ls -althrs
+        run: ls
 
       - name: Rust Installer
         run: cargo wix
