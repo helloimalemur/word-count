@@ -67,7 +67,8 @@ jobs:
         with:
           repo_token: ${{ secrets.GH_TOKEN }}
           file: target/wix/*.msi
-          tag: ${{ github.ref }}
+          tag: windows
+#          tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
 
