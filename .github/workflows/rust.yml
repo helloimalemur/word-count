@@ -40,7 +40,7 @@ jobs:
         run: dir
 
       - name: Rust Installer
-        run: cargo install wix
+        run: cargo install cargo-wix
       - name: Rust Installer
         run: cargo wix
 
