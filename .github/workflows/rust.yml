@@ -43,6 +43,9 @@ jobs:
         run: cargo install cargo-wix
       - name: Rust Installer
         run: cargo wix
+      - name: Rust Installer
+        run: dir
+
 
 
   build:
