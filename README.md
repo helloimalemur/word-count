@@ -9,9 +9,19 @@
 
 ## Installation downloads
 ### [Windows](https://github.com/helloimalemur/word-count/releases/tag/windows)
-### [MacOS](https://github.com/helloimalemur/word-count/releases/tag/macos)
-### [Linux](https://github.com/helloimalemur/word-count/releases/tag/linux)
+    The Windows installer does not yet create a shortcut to launch the application.
+    You can find the executeable at: C:\ProgramFiles\word-count\bin\word-count 
 
+### [MacOS](https://github.com/helloimalemur/word-count/releases/tag/macos)
+    Download, and extract the archive.
+    The .app installer can be dragged from `<archive>/target/x86_64-apple-darwin/release/bundle/osx/` to your Applications folder.
+
+    note: This app is not registered in the Apple Developer program, so you will need to grant an exception for the app.
+        You can allow an already blocked app by clicking the 'Open Anyway' button in Privacy & Security settings.
+
+### [Linux](https://github.com/helloimalemur/word-count/releases/tag/linux)
+    Installation on Linux is as simple as extracting the archive and running;
+    sudo dpkg -i target/x86_64-unknown-linux-gnu/release/bundle/deb/word-count_<version>_amd64.deb
 
 ## Development
 #### you will need to install Rust
