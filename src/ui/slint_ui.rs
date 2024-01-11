@@ -4,8 +4,8 @@ slint::slint! {
     export component WordCount inherits Window {
         title: "Word Count";
 
-        preferred-height: 600px;
-        preferred-width: 1200px;
+        preferred-height: 500px;
+        preferred-width: 1000px;
         in-out property <int> counter: 0;
         callback open-file-pressed <=> open-file.clicked;
         callback re-calc-pressed <=> re-calc.clicked;
