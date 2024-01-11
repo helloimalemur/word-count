@@ -132,6 +132,18 @@
             </Directory>
         </Directory>
 
+        <DirectoryRef Id="ApplicationProgramsFolder">
+            <Component Id="ApplicationShortcut" Guid="DF613B00-69C8-4502-96E8-4A55AA15061E">
+                <Shortcut Id="ApplicationStartMenuShortcut"
+                          Name="Word-Count"
+                          Description="word count"
+                          Target="[#word-count.exe]"
+                          WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+                <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+                <RegistryValue Root="HKCU" Key="Software\MyCompany\Word-Count" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            </Component>
+        </DirectoryRef>
+
         <Feature
             Id='Binaries'
             Title='Application'
