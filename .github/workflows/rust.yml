@@ -80,13 +80,13 @@ jobs:
         run: cargo bundle --release --target x86_64-apple-darwin
 
       - name: Rust Installer
-        run: ls
+        run: tar cvzf word-count.tar.gz target/x86_64-apple-darwin/release/bundle/osx/*.app
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GH_TOKEN }}
-          file: target/x86_64-apple-darwin/release/bundle/osx/*.app
+          file: word-count.tar.gz
 #          file: /Users/runner/work/word-count/word-count/target/x86_64-apple-darwin/release/bundle/osx/Word_Count.app
           tag: macos
 #          tag: ${{ github.ref }}
