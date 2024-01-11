@@ -7,10 +7,16 @@
     For keeping track of the word-count in multiple .docx files at the same time.
     While also providing additional information.
 
-## Running
-#### For the time-being, to Run this and try it out you will need to install Rust
+## Installation downloads
+### [Windows](https://github.com/helloimalemur/word-count/releases/tag/windows)
+### [MacOS](https://github.com/helloimalemur/word-count/releases/tag/macos)
+### [Linux](https://github.com/helloimalemur/word-count/releases/tag/linux)
+
+
+## Development
+#### you will need to install Rust
     https://www.rust-lang.org/tools/install
-#### Then [download+unzip](https://codeload.github.com/helloimalemur/word-count/zip/refs/heads/master) OR Clone the repo
+#### Then Clone the repo
 #### Run the following in a command prompt.
     git clone https://github.com/helloimalemur/word-count.git;
     cd word-count/;
