@@ -33,5 +33,5 @@ short_description = "word count"
 #nisi ut aliquip ex ea commodo consequat.
 #"""
 #deb_depends = ["libgl1-mesa-glx", "libsdl2-2.0-0 (>= 2.0.5)"]
-osx_frameworks = ["SDL2"]
+#osx_frameworks = ["SDL2"]
 #osx_url_schemes = ["com.doe.exampleapplication"]
