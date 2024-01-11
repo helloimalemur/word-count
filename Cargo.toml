@@ -3,6 +3,7 @@ name = "word-count"
 version = "0.1.1"
 edition = "2021"
 authors = ["James Koonts <james@koonts.net>"]
+description = "word count"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
@@ -14,3 +15,23 @@ docx-rs = "0.4.7"
 native-dialog = "0.7.0"
 dotext = "0.1.1"
 os_info = "3.7.0"
+
+
+[package.metadata.bundle]
+name = "Word_Count"
+identifier = "com.koonts.wordcount"
+#icon = ["32x32.png", "128x128.png", "128x128@2x.png"]
+#version = "1.0.0"
+#resources = ["assets", "images/**/*.png", "secrets/public_key.txt"]
+#copyright = "Copyright (c) Jane Doe 2016. All rights reserved."
+#category = "Developer Tool"
+short_description = "word count"
+#long_description = """
+#Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+#eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut
+#enim ad minim veniam, quis nostrud exercitation ullamco laboris
+#nisi ut aliquip ex ea commodo consequat.
+#"""
+#deb_depends = ["libgl1-mesa-glx", "libsdl2-2.0-0 (>= 2.0.5)"]
+osx_frameworks = ["SDL2"]
+#osx_url_schemes = ["com.doe.exampleapplication"]

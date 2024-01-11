@@ -1,3 +1,4 @@
+#![windows_subsystem = "windows"]
 use crate::entities::wordcountapp::WordCountApp;
 use crate::entities::wordcountfile::WordCountFile;
 use crate::ui::slint_ui::WordCount;
@@ -9,6 +10,7 @@ mod calculations;
 mod docx;
 mod entities;
 mod ui;
+
 
 fn main() {
     let word_count_window = WordCount::new().unwrap();
