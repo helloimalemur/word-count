@@ -16,8 +16,6 @@ slint::slint! {
 
         VerticalLayout {
             HorizontalBox {
-                // height: 100px;
-                // width: 1000px;
                 Rectangle {
                     open-file := Button {
                         text: "Open File";
@@ -40,8 +38,6 @@ slint::slint! {
                 }
             }
             box1 := HorizontalBox {
-                // width: 1000px;
-                // height: 400px;
                 rect1 := Rectangle {
                     layo1 := VerticalLayout {
                         for data in root.list-of-structs: my-repeated-text := HorizontalBox {
