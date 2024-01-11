@@ -111,7 +111,7 @@ jobs:
         run: cargo bundle --release --target x86_64-unknown-linux-gnu
 
       - name: Rust Installer
-        run: tar cvzf word-count.tar.gz target/x86_64-unknown-linux-gnu/release/bundle/osx/*.deb
+        run: tar cvzf word-count.tar.gz target/x86_64-unknown-linux-gnu/release/bundle/deb/*.deb
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
