@@ -4,8 +4,8 @@ slint::slint! {
     export component WordCount inherits Window {
         title: "Word Count";
 
-        height: 500px;
-        width: 1000px;
+        preferred-height: 600px;
+        preferred-width: 1200px;
         in-out property <int> counter: 0;
         callback open-file-pressed <=> open-file.clicked;
         callback re-calc-pressed <=> re-calc.clicked;
@@ -16,8 +16,8 @@ slint::slint! {
 
         VerticalLayout {
             HorizontalBox {
-                height: 100px;
-                width: 1000px;
+                // height: 100px;
+                // width: 1000px;
                 Rectangle {
                     open-file := Button {
                         text: "Open File";
@@ -40,8 +40,8 @@ slint::slint! {
                 }
             }
             box1 := HorizontalBox {
-                width: 1000px;
-                height: 400px;
+                // width: 1000px;
+                // height: 400px;
                 rect1 := Rectangle {
                     layo1 := VerticalLayout {
                         for data in root.list-of-structs: my-repeated-text := HorizontalBox {
