@@ -82,14 +82,11 @@ jobs:
       - name: Rust Installer
         run: ls
 
-      - name: copy artifacts
-        run: cp target/x86_64-apple-darwin/debug/bundle/osx/Word_Count.app ./
-
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GH_TOKEN }}
-          file: ./Word_Count.app
+          file: target/x86_64-apple-darwin/debug/bundle/osx/Word_Count.app
           tag: macos
 #          tag: ${{ github.ref }}
           overwrite: true
