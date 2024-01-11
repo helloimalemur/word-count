@@ -17,16 +17,16 @@ jobs:
     - name: Clone
       run: ls -althrs
 
-#    - name: Rust Release
-#    # You may pin to the exact commit or the version.
-#    # uses: manoadamro/rust-release@028b5d008bac5437257ec3ec905b12aed11e766a
-#      uses: manoadamro/rust-release@v1
-#      with:
-#        owner: helloimalemur
-#        repo: word-count
-#        token: ${{ secrets.GH_TOKEN }}
-#        cargo: Cargo.toml
-#        dry_run: false
+    - name: Rust Release
+      # You may pin to the exact commit or the version.
+      # uses: manoadamro/rust-release@028b5d008bac5437257ec3ec905b12aed11e766a
+      uses: manoadamro/rust-release@v1
+      with:
+        owner: helloimalemur
+        repo: word-count
+        token: ${{ secrets.GH_TOKEN }}
+        cargo: Cargo.toml
+        dry_run: false
 
   windows-installer:
 
@@ -50,17 +50,6 @@ jobs:
 
       - name: list artifacts
         run: dir target\wix
-
-      - name: Rust Release
-        # You may pin to the exact commit or the version.
-        # uses: manoadamro/rust-release@028b5d008bac5437257ec3ec905b12aed11e766a
-        uses: manoadamro/rust-release@v1
-        with:
-          owner: helloimalemur
-          repo: word-count
-          token: ${{ secrets.GH_TOKEN }}
-          cargo: Cargo.toml
-          dry_run: false
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
@@ -93,28 +82,17 @@ jobs:
       - name: Rust Installer
         run: ls
 
-      - name: list artifacts
-        run: ls target/
+      - name: copy artifacts
+        run: cp target/x86_64-apple-darwin/debug/bundle/osx/Word_Count.app ./
 
-#      - name: Rust Release
-#        # You may pin to the exact commit or the version.
-#        # uses: manoadamro/rust-release@028b5d008bac5437257ec3ec905b12aed11e766a
-#        uses: manoadamro/rust-release@v1
-#        with:
-#          owner: helloimalemur
-#          repo: word-count
-#          token: ${{ secrets.GH_TOKEN }}
-#          cargo: Cargo.toml
-#          dry_run: false
-#
-#      - name: Upload binaries to release
-#        uses: svenstaro/upload-release-action@v2
-#        with:
-#          repo_token: ${{ secrets.GH_TOKEN }}
-#          file: target/wix/*.msi
-#          tag: windows
-##          tag: ${{ github.ref }}
-#          overwrite: true
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: ./Word_Count.app
+          tag: macos
+#          tag: ${{ github.ref }}
+          overwrite: true
 #          file_glob: true
 
   build:
